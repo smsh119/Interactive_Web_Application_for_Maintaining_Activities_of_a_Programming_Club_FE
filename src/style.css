@@ -1,0 +1,243 @@
+/* -----font import related----- */
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Pacifico&family=Roboto:wght@400;500;700&display=swap");
+
+/* 
+    font-family: 'Lilita One', cursive;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Roboto', sans-serif;
+    
+*/
+
+/* -----font import related End----- */
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+body {
+  margin-top: 70px;
+}
+p {
+  margin: 0;
+}
+.signInVarticalLine {
+  cursor: inherit;
+}
+@media (max-width: 991px) {
+  .signInVarticalLine {
+    display: none;
+    cursor: inherit;
+  }
+}
+
+/*----------- modified bootstrap classes------- */
+.nav-item:hover {
+  color: #05435ec0 !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: #05445e !important;
+}
+
+/*----------- modified bootstrap classes End------- */
+
+/* --------------General Classes----------- */
+.clr1 {
+  color: #05445e !important;
+}
+.clr2 {
+  color: #189ab4 !important;
+}
+.clr3 {
+  color: #75e6da !important;
+}
+.clr4 {
+  color: #d4f1f4 !important;
+}
+.clrtest {
+  color: red;
+}
+.clr1-bg {
+  background-color: #05445e !important;
+}
+.clr2-bg {
+  background-color: #189ab4 !important;
+}
+.clr3-bg {
+  background-color: #75e6da !important;
+}
+.clr4-bg {
+  background-color: #d4f1f4 !important;
+}
+
+.fontLilitaOne {
+  font-family: "Lilita One", cursive !important;
+}
+
+h1 {
+  font-family: "Lilita One", cursive;
+  color: #05445e;
+}
+h2 {
+  font-family: "Lilita One", cursive;
+  color: #05445e;
+}
+
+/* --------------------welcome section --------------------- */
+
+.welcomeSection {
+}
+.ruLogoAndName img {
+  width: 30%;
+  display: block;
+  margin: auto;
+}
+.ruLogoAndName h2 {
+  font-family: "Lilita One", cursive;
+  font-size: 2vw;
+  text-align: center;
+  color: #05445e;
+}
+
+.welcomeAndName h1 {
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  font-size: 6.5vw;
+  color: #189ab4;
+  margin-top: 3vw;
+}
+.welcomeAndName h2 {
+  font-family: "Pacifico", cursive;
+  text-align: center;
+  font-size: 4vw;
+  color: #05445e;
+}
+
+/* -----------------home cards --------------------------- */
+
+.homeCards {
+  margin-top: 50px;
+  padding: 0px 20px;
+}
+.homeCard {
+  background-color: #189ab4;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 0 0 0;
+  margin: 2px;
+}
+.homeCard h4 {
+  font-size: 1.3rem;
+}
+.homeCard p {
+  font-size: 1.2rem;
+}
+
+/*-------------------------intro and noticeboard------------------ */
+
+.introAndNotice {
+  margin-top: 50px;
+  background-color: #d4f1f4;
+  padding: 20px 20px;
+  border-radius: 10px;
+  height: fit-content;
+}
+.introAndNotice .clubInto {
+}
+.introAndNotice .clubInto p {
+  font-family: "Lilita One", cursive;
+  text-align: justify;
+  margin-bottom: 20px;
+}
+.introAndNotice .noticeboard {
+  height: 300px;
+  overflow-y: auto;
+}
+.introAndNotice .noticeboard .notice {
+  background-color: #189ab4;
+  color: white;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  padding: 5px 0 0px 5px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0px;
+}
+
+/* --------------------------big cards-------------------- */
+
+.bigCards {
+  margin-top: 50px;
+}
+
+.bigCardsRow {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.bigCard {
+  margin-bottom: 20px;
+  display: inline-block;
+  width: 32%;
+  padding: 100px 0px;
+  background-color: #d4f1f4;
+  color: #05445e;
+  font-family: "Lilita One", cursive;
+  font-size: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  min-width: 300px;
+}
+.bigCard:hover {
+  background-color: #c2f1f7;
+  color: #096f9b;
+}
+
+/* ----------------Footer--------------------- */
+.footer {
+  /* margin-top: 50px; */
+  padding: 20px;
+  background-color: #d4f1f4;
+  border-radius: 10px;
+}
+
+.footer .footerSection {
+  margin-bottom: 20px;
+}
+
+.footer .footerSection h4 {
+  color: #05445e;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.footer .footerSection p {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+.footer .footerSection div {
+  margin-left: 10px;
+}
+.footer .footerSection div .footerLinks {
+  display: block;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+  font-size: 0.6rem;
+}
+.footer .footerSection div .footerLinks:hover {
+  color: #189ab4;
+}
+
+/* ---------------all rights reserved------------------ */
+
+.footerAllRights {
+  text-align: center;
+  background-color: #d4f1f4;
+  margin-top: 5px;
+  color: #05445e;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
