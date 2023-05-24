@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ruLogo from "../assets/ru-logo.png";
 import { Link } from "react-router-dom";
+import NoticeboardHome from "./noticeboardHome";
 const renderWelcomeSection = () => {
   return (
     <div className="welcomeSection">
@@ -77,31 +78,7 @@ const renderIntroAndNotice = () => {
           </p>
         </div>
         <div className="col-md-6">
-          <h2>Noticeboard</h2>
-          <div className="noticeboard">
-            {/*-------------------------------- need to work with notices here-------------- */}
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-            <div className="notice">
-              <p>01 May | ICE Logic Battle#10 - 8:00PM - 05/05/23</p>
-            </div>
-          </div>
+          <NoticeboardHome />
         </div>
       </div>
     </div>
@@ -178,6 +155,10 @@ const renderFooter = () => {
 };
 
 function Home(props) {
+  useEffect(() => {
+    document.title = "ICE_PC";
+  }, []);
+
   return (
     <>
       {renderWelcomeSection()}

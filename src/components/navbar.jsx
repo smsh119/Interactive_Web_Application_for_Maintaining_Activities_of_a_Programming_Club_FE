@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-function Navbar(props) {
+function Navbar({ user }) {
   return (
     <nav className="navbar fixed-top navbar-expand-lg clr4-bg">
       <div className="container-fluid">
@@ -52,24 +52,50 @@ function Navbar(props) {
             </li>
           </ul>
           <div className="d-flex">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink className="nav-link fontLilitaOne clr2" to="/signIn">
-                  Sign in
-                </NavLink>
-              </li>
-              {/* this is just for the horizontal line */}
-              <li className="nav-item">
-                <NavLink className="nav-link fontLilitaOne clr2 signInVarticalLine">
-                  |
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link fontLilitaOne clr2" to="/signUp">
-                  Sign up
-                </NavLink>
-              </li>
-            </ul>
+            {!user && (
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <NavLink className="nav-link fontLilitaOne clr2" to="/signIn">
+                    Sign in
+                  </NavLink>
+                </li>
+                {/* this is just for the horizontal line */}
+                <li className="nav-item">
+                  <NavLink className="nav-link fontLilitaOne clr2 signInVarticalLine">
+                    |
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link fontLilitaOne clr2" to="/signUp">
+                    Sign up
+                  </NavLink>
+                </li>
+              </ul>
+            )}
+
+            {user && (
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link fontLilitaOne clr2"
+                    to={"/profile/" + user.sid}
+                  >
+                    {user.sid}
+                  </NavLink>
+                </li>
+                {/* this is just for the horizontal line */}
+                <li className="nav-item">
+                  <NavLink className="nav-link fontLilitaOne clr2 signInVarticalLine">
+                    |
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link fontLilitaOne clr2" to="/logout">
+                    Logout
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
       </div>

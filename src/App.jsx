@@ -10,11 +10,19 @@ import SignInForm from "./components/signInForm";
 import SignUpForm from "./components/signUpForm";
 import NotFound from "./components/notFound";
 import Home from "./components/home";
+import Notices from "./components/notices";
+import NoticeForm from "./components/noticeForm";
+import TestCC from "./components/testCC";
+import Logout from "./components/logout";
+import Profile from "./components/profile";
+import { ToastContainer } from "react-toastify";
+import auth from "./services/authService";
 
 function App() {
   return (
     <>
-      <Navbar />
+      <ToastContainer />
+      <Navbar user={auth.getCurrentUser()} />
       <main className="container">
         <Routes>
           <Route path="/programmersList" element={<ProgrammersList />} />
@@ -23,8 +31,13 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/signIn" element={<SignInForm />} />
           <Route path="/signUp" element={<SignUpForm />} />
+          <Route path="/notices" element={<Notices />} />
+          <Route path="/notices/noticeForm" element={<NoticeForm />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<NotFound />} />
+          <Route path="/test" element={<TestCC />} />
         </Routes>
       </main>
     </>

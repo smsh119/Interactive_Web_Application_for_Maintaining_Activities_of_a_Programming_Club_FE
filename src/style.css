@@ -22,6 +22,7 @@ p {
 .signInVarticalLine {
   cursor: inherit;
 }
+
 @media (max-width: 991px) {
   .signInVarticalLine {
     display: none;
@@ -71,6 +72,31 @@ p {
 
 .fontLilitaOne {
   font-family: "Lilita One", cursive !important;
+}
+
+.custom-btn {
+  /* font-size: 1.1rem; */
+  /* padding: 0.5em 1em; */
+  /* border-radius: 0.5em; */
+  background-color: #096f9b;
+  color: white;
+  font-weight: bold;
+  /* border: none; */
+}
+.custom-btn:hover {
+  background-color: #0a80b3;
+  color: white;
+}
+
+label {
+  font-size: 1.2rem;
+}
+input {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+input[type="date"] {
+  padding: 10px;
 }
 
 h1 {
@@ -152,16 +178,38 @@ h2 {
 .introAndNotice .noticeboard {
   height: 300px;
   overflow-y: auto;
+  cursor: pointer;
+  transition: background-color 0.5s;
+  border-radius: 20px;
 }
-.introAndNotice .noticeboard .notice {
+.introAndNotice .noticeboard:hover {
+  background-color: #1f6777;
+}
+.notice {
   background-color: #189ab4;
   color: white;
   font-size: 1.6rem;
   border-radius: 5px;
-  padding: 5px 0 0px 5px;
+  padding: 0.5em 0.5em;
   font-weight: bold;
-  text-align: center;
+  /* text-align: center; */
   margin: 10px 0px;
+  /* cursor: pointer; */
+  z-index: 2;
+}
+/* .notice:hover {
+  background-color: #3bb1c9;
+} */
+
+.noticeDetails {
+  margin: -13px 0px 0px 0px;
+  padding: 1em;
+  border: 4px solid #189ab4;
+  z-index: 1;
+  font-size: 1.2rem;
+}
+.noticeDetails span {
+  font-weight: bold;
 }
 
 /* --------------------------big cards-------------------- */
@@ -240,4 +288,35 @@ h2 {
   color: #05445e;
   font-weight: bold;
   font-size: 0.6rem;
+}
+
+/* -------------signUp form------------- */
+.signUpForm h1 {
+  margin-top: 100px;
+  text-align: center;
+}
+.signUpForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.signUpForm input {
+  width: 200px;
+  text-align: center;
+  border-radius: 2.5em;
+  background-color: #d4f1f4;
+  border: none;
+  padding: 0.7em 0em;
+  margin-top: -10px;
+}
+
+.signUpForm button {
+  margin-top: 30px;
+  border-radius: 1em;
+  padding: 0.4em 1.5em;
+}
+.signUpForm .errdiv {
+  width: 200px;
+  font-size: 0.7rem;
 }
