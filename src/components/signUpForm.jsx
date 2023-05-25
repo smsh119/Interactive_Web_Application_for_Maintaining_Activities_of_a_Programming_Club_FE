@@ -35,7 +35,7 @@ class SignUpFormC extends Form {
     const navigate = this.props.navigate;
     if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
     return (
-      <div className="signUpForm">
+      <div className="signInUpForm">
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("sid", null, "text", "StudentID")}

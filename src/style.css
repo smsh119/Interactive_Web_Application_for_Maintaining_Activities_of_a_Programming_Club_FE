@@ -291,17 +291,17 @@ h2 {
 }
 
 /* -------------signUp form------------- */
-.signUpForm h1 {
+.signInUpForm h1 {
   margin-top: 100px;
   text-align: center;
 }
-.signUpForm form {
+.signInUpForm form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.signUpForm input {
+.signInUpForm input {
   width: 200px;
   text-align: center;
   border-radius: 2.5em;
@@ -311,12 +311,103 @@ h2 {
   margin-top: -10px;
 }
 
-.signUpForm button {
+.signInUpForm button {
   margin-top: 30px;
   border-radius: 1em;
   padding: 0.4em 1.5em;
 }
-.signUpForm .errdiv {
+.signInUpForm .errdiv {
   width: 200px;
   font-size: 0.7rem;
+}
+
+/* ------------------contest page-------------------- */
+
+.contestCard {
+  background-color: #d4f1f4;
+  padding: 30px 10px;
+  margin-top: 30px;
+  border-radius: 20px;
+}
+.contestCard .contestCardPicDiv {
+  /* border: 5px solid black; */
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 30px;
+}
+
+.img {
+  width: 100%;
+  height: 200px;
+  /* overflow-y: hidden; */
+  /* background-color: red; */
+  /* border: 2px solid black; */
+}
+.img img {
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+}
+.imgRight {
+  margin-top: 10px;
+  /* margin-bottom: 10px; */
+}
+.imgLeft {
+  margin-top: -10px;
+  /* margin-bottom: 50px; */
+}
+
+.divider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.divider img {
+  width: 80%;
+}
+
+.contestCard .contestCardDesDiv {
+  position: relative;
+}
+.contestCard .contestCardDesDiv h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.contestCard .contestCardDesDiv ul {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.contestCard .contestCardDesDiv p {
+  margin-bottom: 20px;
+  color: #05445e;
+}
+.contestCard .contestCardDesDiv p span {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.contestCard .contestCardDesDiv a {
+  margin-top: 10px;
+  background-color: #05445e;
+  color: white;
+  display: inline-block;
+  font-size: 1.4rem;
+  padding: 0.5em 1em;
+  border-radius: 0.4em;
+  text-decoration: none;
+}
+.contestCard .contestCardDesDiv a:hover {
+  background-color: #096f9b;
+}
+
+.contestCard .contestCardDesDiv button {
+  padding: 0.6em 2.2em;
+  margin-top: 10px;
+  /* right: 20px; */
+}
+
+@media (max-width: 991px) {
+  .divider {
+    display: none;
+  }
 }

@@ -17,6 +17,7 @@ import Logout from "./components/logout";
 import Profile from "./components/profile";
 import { ToastContainer } from "react-toastify";
 import auth from "./services/authService";
+import ContestForm from "./components/contestForm";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/programmersList" element={<ProgrammersList />} />
           <Route path="/contestHistory" element={<ContestHistory />} />
+          <Route path="/contestHIstory/contestForm" element={<ContestForm />} />
           <Route path="/photoGallery" element={<PhotoGallery />} />
           <Route path="/about" element={<About />} />
           <Route path="/signIn" element={<SignInForm />} />

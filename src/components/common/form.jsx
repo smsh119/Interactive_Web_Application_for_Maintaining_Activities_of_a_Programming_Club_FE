@@ -96,19 +96,41 @@ class Form extends Component {
     );
   }
 
-  renderDate(name, label) {
+  renderDate(name, label, type = "datetime-local") {
     return (
       <div className="form-group">
         <label htmlFor={name}>{label}</label>
         <input
           name={name}
-          type="datetime-local"
+          type={type}
           onChange={this.handleChange}
           className="form-control"
         />
         {this.state.errors[name] && (
           <div className="alert alert-danger">{this.state.errors[name]}</div>
         )}
+      </div>
+    );
+  }
+
+  handleImg = ({ currentTarget: input }) => {
+    const data = { ...this.state.data };
+    const img = input.files[0];
+    data[input.name] = img;
+    this.setState({ data });
+    // console.log(this.state.data);
+  };
+
+  renderSelectFile(name, label) {
+    return (
+      <div className="form-group">
+        <label htmlFor={name}>{label}</label>
+        <input
+          name={name}
+          type="file"
+          onChange={this.handleImg}
+          className="form-control"
+        />
       </div>
     );
   }
