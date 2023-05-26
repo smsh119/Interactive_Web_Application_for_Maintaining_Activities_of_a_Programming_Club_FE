@@ -36,7 +36,6 @@ class SignInFormC extends Form {
   };
 
   render() {
-    console.log(auth.getCurrentUser());
     const navigate = this.props.navigate;
     // if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
     return (

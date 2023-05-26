@@ -7,7 +7,11 @@ import { useParams, useNavigate } from "react-router-dom";
 
 class SignUpFormC extends Form {
   state = {
-    data: { sid: "", email: "", password: "" },
+    data: {
+      sid: "",
+      email: "",
+      password: "",
+    },
     errors: {},
   };
 

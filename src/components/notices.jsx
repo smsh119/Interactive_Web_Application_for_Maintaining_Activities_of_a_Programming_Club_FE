@@ -47,6 +47,7 @@ function Notices(props) {
   };
 
   if (loading) return; // to fix the async works in use effect
+  // console.log(notices[0]._id);
   return (
     <>
       <h1>Notices</h1>
