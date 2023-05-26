@@ -9,10 +9,6 @@ export function register(user) {
     password: user.password,
     isUpdated: user.isUpdated,
     profileId: "646fdb1eeb44a104d1d50ab2",
-    isUpdated: false,
-    isAdmin: false,
-    isSuperAdmin: false,
   };
-  console.log(postObj);
   return http.post(apiEndPoint, postObj);
 }

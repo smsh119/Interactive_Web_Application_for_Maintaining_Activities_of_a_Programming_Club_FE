@@ -1,9 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import auth from "../services/authService";
 import img1 from "../assets/img1.jpg";
 import divider from "../assets/divider.png";
-import { deleteContest, getContests } from "../services/contestService";
+import {
+  deleteContest,
+  getContests,
+  updateContest,
+} from "../services/contestService";
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import getImgUrl from "../services/imgService";
@@ -12,6 +17,7 @@ function ContestHistory(props) {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  let isAdmin = auth.getCurrentUser() ? auth.getCurrentUser().isAdmin : false;
 
   useEffect(() => {
     async function fetchData() {
@@ -38,20 +44,43 @@ function ContestHistory(props) {
     }
   };
 
+  const handleApprove = async (contest) => {
+    await updateContest(contest);
+    const conts = [...contests];
+    const indx = conts.indexOf(contest);
+    const cont = { ...conts[indx] };
+    cont.isApproved = true;
+    conts[indx] = cont;
+    setContests(conts);
+  };
+
   if (loading) return; // to fix the async works in use effect
+
   return (
     <div className="mb-5">
       <h1>Contest History</h1>
-      <button
-        className="btn btn-lg custom-btn"
-        onClick={() => navigate("/contestHistory/contestForm")}
-      >
-        Add Contest
-      </button>
+      {auth.getCurrentUser() && (
+        <button
+          className="btn btn-lg custom-btn"
+          onClick={() => navigate("/contestHistory/contestForm")}
+        >
+          Add Contest
+        </button>
+      )}
 
       {contests.map((contest) => {
+        if (!isAdmin && !contest.isApproved) return;
         return (
           <div key={contest._id} className="row contestCard">
+            {isAdmin && !contest.isApproved && (
+              <button
+                className="btn btn-lg custom-btn"
+                style={{ margin: "0px 0px 10px 0px" }}
+                onClick={() => handleApprove(contest)}
+              >
+                Approve Post
+              </button>
+            )}
             <div className="col-lg-4 contestCardPicDiv">
               <div className="img imgLeft">
                 <img src={getImgUrl(contest.imgLink[0])} alt="" />
@@ -87,12 +116,14 @@ function ContestHistory(props) {
               <h4>Rank: {contest.rank}</h4>
               <a href={contest.link}>Standings</a>
               <br />
-              <button
-                className="btn btn-danger btn-lg"
-                onClick={() => handleDelete(contest)}
-              >
-                Delete
-              </button>
+              {isAdmin && (
+                <button
+                  className="btn btn-danger btn-lg"
+                  onClick={() => handleDelete(contest)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         );

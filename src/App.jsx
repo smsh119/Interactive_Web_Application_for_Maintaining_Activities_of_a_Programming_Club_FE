@@ -16,6 +16,7 @@ import TestCC from "./components/testCC";
 import Logout from "./components/logout";
 import Profile from "./components/profile";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import auth from "./services/authService";
 import ContestForm from "./components/contestForm";
 

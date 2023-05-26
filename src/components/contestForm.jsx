@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import { addContest } from "../services/contestService";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 class ContestFormC extends Form {
   state = {
@@ -87,6 +88,7 @@ class ContestFormC extends Form {
     try {
       await addContest(data);
       const navigate = this.props.navigate;
+      toast.info("Contest post successful!");
       navigate("/contestHistory");
     } catch (e) {
       console.log(e);

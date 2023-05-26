@@ -12,6 +12,11 @@ export function getContests() {
 export function addContest(contest) {
   return http.post(apiEndPoint, contest);
 }
+export function updateContest(contest) {
+  return http.put(apiEndPoint + "/approve/" + contest._id, {
+    isApproved: true,
+  });
+}
 export function deleteContest(contestId) {
   return http.delete(contestUrl(contestId));
 }

@@ -24,6 +24,7 @@ class SignInFormC extends Form {
 
       if (location.state) {
         const prevUrl = location.state.prevUrl;
+        console.log(prevUrl);
         window.location = prevUrl;
       } else window.location = "/";
     } catch (ex) {
@@ -37,7 +38,7 @@ class SignInFormC extends Form {
 
   render() {
     const navigate = this.props.navigate;
-    // if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
+    if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
     return (
       <div className="signInUpForm">
         <h1>Sign In</h1>
