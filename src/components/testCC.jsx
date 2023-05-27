@@ -1,28 +1,43 @@
-import React, { Component } from "react";
-import { getNotices } from "../services/noticeService";
-import axios from "axios";
+import React, { useRef, useState } from "react";
+import { InputText } from "primereact/inputtext";
+import { FileUpload } from "primereact/fileupload";
 
-class TestCC extends Component {
-  state = {
-    notice: null,
+export function TestCC() {
+  const [img, setImg] = useState("");
+
+  const handleProPicChange = (e) => {
+    const file = e.currentTarget.files[0];
+    if (file && file.type.substring(0, 5) === "image") {
+      setImg(file);
+      console.log(img);
+    } else {
+      setImg(null);
+    }
   };
 
-  async componentDidMount() {
-    const x = await axios.get("https://asm-vidly.onrender.com/api/img/img", {
-      responseType: "blob",
-    });
-    let imgUrl = URL.createObjectURL(x.data);
-    this.setState({ notice: imgUrl });
-    console.log(x);
-  }
+  return (
+    <div className="">
+      <InputText
+        type="file"
+        accept="/img/*"
+        onChange={(e) => handleProPicChange(e)}
+      />
+    </div>
+  );
 
-  render() {
-    return (
-      <>
-        <img src={this.state.notice} alt="" />
-      </>
-    );
-  }
+  // return (
+  //   <div className="card flex justify-content-center">
+  //     <FileUpload
+  //       mode="basic"
+  //       name="demo[]"
+  //       url="/api/upload"
+  //       accept="image/*"
+  //       maxFileSize={1000000}
+  //       onUpload={(e) => handleChange}
+  //       chooseLabel="Browse"
+  //     />
+  //   </div>
+  // );
 }
 
 export default TestCC;

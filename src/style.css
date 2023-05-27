@@ -323,6 +323,10 @@ h2 {
 
 /* ------------------contest page-------------------- */
 
+.contestHistoryWrapper {
+  /* padding: 0px 30px; */
+}
+
 .contestCard {
   background-color: #d4f1f4;
   padding: 30px 10px;
@@ -332,17 +336,10 @@ h2 {
 .contestCard .contestCardPicDiv {
   /* border: 5px solid black; */
   display: grid;
-  grid-template-rows: 14vw 14vw;
-  grid-template-columns: 14vw 14vw;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
   /* margin-bottom: 30px; */
-}
-
-.img {
-  width: 100%;
-  height: 100%;
-  /* overflow-y: hidden; */
-  /* background-color: red; */
-  /* border: 2px solid black; */
 }
 
 @media (max-width: 991px) {
@@ -355,14 +352,18 @@ h2 {
   }
   .img {
     width: 100%;
-    height: 200px;
+    height: 100%;
   }
 }
 
 .img img {
+  border: 5px solid #0a80b3;
+  background-color: #d4f1f4;
+
   width: 100%;
-  height: 100%;
-  padding: 5px;
+  height: 200px;
+  object-fit: contain;
+  /* padding: 5px; */
 }
 .imgRight {
   margin-top: 10px;
@@ -370,6 +371,7 @@ h2 {
 }
 .imgLeft {
   margin-top: -10px;
+  /* margin-right: 10px; */
   /* margin-bottom: 50px; */
 }
 
@@ -425,4 +427,93 @@ h2 {
   .divider {
     display: none;
   }
+}
+
+/* ---------------------Profile page ------------------------------ */
+
+.profileWrap {
+  padding: 0 20px;
+  margin-bottom: 100px;
+}
+
+.profileWrap .picAndBioSection {
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+.profileWrap .picAndBioSection .picAndNameSec {
+  /* padding-left: 3%; */
+  padding: 0 3%;
+  margin-bottom: 30px;
+}
+.profileWrap .picAndBioSection .picAndNameSec .profilePicDiv {
+}
+.profileWrap .picAndBioSection .picAndNameSec .profilePicDiv img {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  border: 7px solid #189ab4;
+}
+.profileWrap .picAndBioSection .picAndNameSec h3 {
+  color: #05445e;
+}
+.profileWrap .picAndBioSection .picAndNameSec h5 {
+  color: #05445e;
+  font-weight: bold;
+}
+.profileWrap .picAndBioSection .picAndNameSec span {
+}
+.profileWrap .picAndBioSection .picAndNameSec .ProPicUpdateButton {
+  margin: 2px 0 5px 0;
+}
+.profileWrap .picAndBioSection .picAndNameSec button {
+}
+
+.profileWrap .picAndBioSection .bioAndContactSec {
+}
+.profileWrap .picAndBioSection .bioAndContactSec h4 {
+  color: #189ab4;
+  font-size: 1.5rem;
+}
+.profileWrap .picAndBioSection .bioAndContactSec p {
+  max-width: 700px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+.profileWrap .picAndBioSection .bioAndContactSec span {
+  font-weight: bold;
+  color: #189ab4;
+}
+.profileWrap .picAndBioSection .bioAndContactSec .cfCards {
+}
+.profileWrap .picAndBioSection .bioAndContactSec .cfCard {
+  background-color: #0a80b3;
+  display: inline-block;
+  font-size: 1.4rem;
+  color: white;
+  font-weight: bold;
+  border-radius: 0.4em;
+  padding: 0.5em 1em 0.5em 0;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+.profileWrap .picAndBioSection .bioAndContactSec .cfCard span {
+  color: #05445e;
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 0.4em;
+  margin: 0px 4px;
+}
+
+.profileWrap .contestLinksSection {
+}
+.profileWrap .contestLinksSection h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+.profileWrap .contestLinksSection img {
+  /* width: 200px; */
+  height: 35px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  cursor: pointer;
 }

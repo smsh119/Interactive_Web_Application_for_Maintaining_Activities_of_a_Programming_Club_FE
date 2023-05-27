@@ -3,7 +3,7 @@ import Input from "./input";
 import Joi from "joi-browser";
 import Select from "./select";
 import dayjs from "dayjs";
-
+import http from "../../services/httpService";
 class Form extends Component {
   state = {
     data: {},
@@ -47,7 +47,14 @@ class Form extends Component {
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
-
+    // if (input.name === "codeforces") {
+    //   //for calling codeforces api
+    //   http
+    //     .get(`https://codeforces.com/api/user.info?${input.value}`)
+    //     .then((res) => {
+    //       if (res.status !== "OK") errors[input.name] = "CF handle not valid !";
+    //     });
+    // }
     const data = { ...this.state.data };
     if (input.name === "programDate")
       data[input.name] = dayjs(input.value).toISOString();

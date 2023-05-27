@@ -78,7 +78,7 @@ function Navbar({ user }) {
                 <li className="nav-item">
                   <NavLink
                     className="nav-link fontLilitaOne clr2"
-                    to={"/profile/" + user.sid}
+                    to={"/profiles/" + user.profileId}
                   >
                     {user.sid}
                   </NavLink>

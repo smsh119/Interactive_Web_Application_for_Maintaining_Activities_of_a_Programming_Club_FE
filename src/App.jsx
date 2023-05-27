@@ -14,11 +14,12 @@ import Notices from "./components/notices";
 import NoticeForm from "./components/noticeForm";
 import TestCC from "./components/testCC";
 import Logout from "./components/logout";
-import Profile from "./components/profile";
+import Profiles from "./components/profiles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "./services/authService";
 import ContestForm from "./components/contestForm";
+import ProfileForm from "./components/profileForm";
 
 function App() {
   return (
@@ -36,7 +37,8 @@ function App() {
           <Route path="/signUp" element={<SignUpForm />} />
           <Route path="/notices" element={<Notices />} />
           <Route path="/notices/noticeForm" element={<NoticeForm />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profiles/:id" element={<Profiles />} />
+          <Route path="/profiles/profileForm" element={<ProfileForm />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<NotFound />} />

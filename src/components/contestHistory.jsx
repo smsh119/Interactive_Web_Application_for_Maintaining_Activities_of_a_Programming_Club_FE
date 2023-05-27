@@ -57,7 +57,7 @@ function ContestHistory(props) {
   if (loading) return; // to fix the async works in use effect
 
   return (
-    <div className="mb-5">
+    <div className="mb-5 contestHistoryWrapper">
       <h1>Contest History</h1>
       {auth.getCurrentUser() && (
         <button
