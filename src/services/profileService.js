@@ -10,9 +10,8 @@ export function getProfiles() {
   return http.get(apiEndPoint);
 }
 
-export function getProfile() {
-  //   console.log("get profile called");
-  return http.get(`/profiles/me`);
+export async function getProfile(id) {
+  return await http.get(`/profiles/${id}`);
 }
 
 export async function saveProfile(profile) {

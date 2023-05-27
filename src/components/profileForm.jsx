@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import auth from "../services/authService";
 import { getProfile, getUser, saveProfile } from "../services/profileService";
+import { toast } from "react-toastify";
 
 class ProfileFormC extends Form {
   state = {
@@ -50,8 +51,8 @@ class ProfileFormC extends Form {
     try {
       const { data: user } = await getUser();
       // console.log(user);
-      if (!user.isUpdated) return; // uncomment kora lagbe;
-      const { data: response } = await getProfile();
+      if (!user.isUpdated) return;
+      const { data: response } = await getProfile(user.profileId);
       //   console.log(response);
       this.setState({ data: this.mapToViewModel(response) });
     } catch (ex) {
@@ -63,15 +64,6 @@ class ProfileFormC extends Form {
   }
 
   async componentDidMount() {
-    //   const user = auth.getCurrentUser();
-    //   const navigate = this.props.navigate;
-
-    // if (!user) {
-    //   return setTimeout(() =>
-    //     navigate("/login", { state: { prevUrl: this.props.location.pathname } })
-    //   );
-    // }
-    // console.log(this.state.data);
     await this.populateInfo();
   }
 
@@ -129,13 +121,16 @@ class ProfileFormC extends Form {
     const obj = this.mapToRequestModel(data);
 
     // console.log(obj);
-
-    await saveProfile(obj);
-
-    const navigate = this.props.navigate;
-    setTimeout(() => {
-      navigate("/profiles/" + auth.getCurrentUser()._id);
-    }, 2000);
+    try {
+      await saveProfile(obj);
+      const navigate = this.props.navigate;
+      setTimeout(() => {
+        navigate("/profiles/" + auth.getCurrentUser().profileId);
+      }, 2000);
+    } catch (error) {
+      toast.error("Codeforces handle is invalid!");
+      console.log(error.response.data);
+    }
   };
 
   render() {

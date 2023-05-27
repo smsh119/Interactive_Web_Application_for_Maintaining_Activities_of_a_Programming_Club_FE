@@ -17,14 +17,20 @@ function Profiles(props) {
   const [profilePicture, setProfilePicture] = useState("");
   const user = auth.getCurrentUser();
   const userId = params.id;
+  const ownProfile = user.profileId === userId || userId === "me";
 
   if (!user.isUpdated) return <ProfileUpdateUser />;
 
   useEffect(() => {
     async function fetchData() {
-      const { data: profile } = await getProfile();
-      setProfileInfo(profile);
-      setLoading(false);
+      try {
+        const { data: profile } = await getProfile(userId);
+        setProfileInfo(profile);
+        setLoading(false);
+      } catch (e) {
+        console.log(e.response.status);
+        window.location = "/notFound";
+      }
     }
     fetchData();
   }, []);
@@ -77,29 +83,35 @@ function Profiles(props) {
               alt=""
             />
           </div>
-          <button
-            className="btn custom-btn ProPicUpdateButton"
-            onClick={() => setShowUpdateImgBtn(!showUpdateImgBtn)}
-          >
-            Update Picture
-          </button>
-          {showUpdateImgBtn && (
-            <form onSubmit={handleProPicChange}>
-              <InputText type="file" accept="/img/*" onChange={handleImg} />
-              <input type="submit" />
-            </form>
+          {ownProfile && (
+            <>
+              <button
+                className="btn custom-btn ProPicUpdateButton"
+                onClick={() => setShowUpdateImgBtn(!showUpdateImgBtn)}
+              >
+                Update Picture
+              </button>
+              {showUpdateImgBtn && (
+                <form onSubmit={handleProPicChange}>
+                  <InputText type="file" accept="/img/*" onChange={handleImg} />
+                  <input type="submit" />
+                </form>
+              )}
+            </>
           )}
           <h3>{profileInfo.name}</h3>
           <h5>
             <span>ID: </span>
             {user.sid}
           </h5>
-          <button
-            className="btn custom-btn"
-            onClick={() => navigate("/profiles/profileForm")}
-          >
-            Edit profile
-          </button>
+          {ownProfile && (
+            <button
+              className="btn custom-btn"
+              onClick={() => navigate("/profiles/profileForm")}
+            >
+              Edit profile
+            </button>
+          )}
         </div>
         <div className="col-lg bioAndContactSec">
           <h4>Bio</h4>
@@ -136,36 +148,48 @@ function Profiles(props) {
 
       <div className="contestLinksSection">
         <h2>Online Judge Links</h2>
-        <img
-          onClick={() =>
-            (window.location = `https://${profileInfo.onlineJudgeLink.githubLink}`)
-          }
-          src={`https://img.shields.io/badge/${"Github"}-${"github"}-blue`}
-          alt=""
-        />
-        <img
-          onClick={() =>
-            (window.location = `https://${profileInfo.onlineJudgeLink.codeforcesLink}`)
-          }
-          src={`https://img.shields.io/badge/${"Codeforces"}-${
-            profileInfo.onlineJudgeHandle.codeforces
-          }-blue`}
-          alt=""
-        />
-        <img
-          onClick={() =>
-            (window.location = `https://${profileInfo.onlineJudgeLink.leetcodeLink}`)
-          }
-          src={`https://img.shields.io/badge/${"Leetcode"}-${"leetcode"}-blue`}
-          alt=""
-        />
-        <img
-          onClick={() =>
-            (window.location = `https://${profileInfo.onlineJudgeLink.stopstalkLink}`)
-          }
-          src={`https://img.shields.io/badge/${"Stopstalk"}-${"stopstalk"}-blue`}
-          alt=""
-        />
+        <a
+          href={`//${profileInfo.onlineJudgeLink.githubLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`https://img.shields.io/badge/${"Github"}-${"github"}-blue`}
+            alt=""
+          />
+        </a>
+        <a
+          href={`//${profileInfo.onlineJudgeLink.codeforcesLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`https://img.shields.io/badge/${"Codeforces"}-${
+              profileInfo.onlineJudgeHandle.codeforces
+            }-blue`}
+            alt=""
+          />
+        </a>
+        <a
+          href={`//${profileInfo.onlineJudgeLink.leetcodeLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`https://img.shields.io/badge/${"Leetcode"}-${"Leetcode"}-blue`}
+            alt=""
+          />
+        </a>
+        <a
+          href={`//${profileInfo.onlineJudgeLink.stopstalkLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            src={`https://img.shields.io/badge/${"Stopstalks"}-${"Stopstalks"}-blue`}
+            alt=""
+          />
+        </a>
       </div>
     </div>
   );

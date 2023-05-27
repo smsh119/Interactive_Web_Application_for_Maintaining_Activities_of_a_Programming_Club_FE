@@ -1,43 +1,24 @@
 import React, { useRef, useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { FileUpload } from "primereact/fileupload";
+import http from "../services/httpService";
 
 export function TestCC() {
-  const [img, setImg] = useState("");
-
-  const handleProPicChange = (e) => {
-    const file = e.currentTarget.files[0];
-    if (file && file.type.substring(0, 5) === "image") {
-      setImg(file);
-      console.log(img);
-    } else {
-      setImg(null);
-    }
+  const handleClick = async () => {
+    window.open("//google.com");
   };
 
   return (
-    <div className="">
-      <InputText
-        type="file"
-        accept="/img/*"
-        onChange={(e) => handleProPicChange(e)}
-      />
+    <div>
+      <h1>test</h1>
+      <button className="btn btn-primary" onClick={handleClick}>
+        a button
+      </button>
     </div>
   );
-
-  // return (
-  //   <div className="card flex justify-content-center">
-  //     <FileUpload
-  //       mode="basic"
-  //       name="demo[]"
-  //       url="/api/upload"
-  //       accept="image/*"
-  //       maxFileSize={1000000}
-  //       onUpload={(e) => handleChange}
-  //       chooseLabel="Browse"
-  //     />
-  //   </div>
-  // );
 }
 
 export default TestCC;
+
+//     .get(`https://codeforces.com/api/user.info?${input.value}`)
+//     .then((res) => {
+//       if (res.status !== "OK") errors[input.name] = "CF handle not valid !";
+//     });
