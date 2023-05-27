@@ -114,7 +114,9 @@ function ContestHistory(props) {
                 {dayjs(contest.date).format("YYYY/MM/DD")}
               </p>
               <h4>Rank: {contest.rank}</h4>
-              <a href={contest.link}>Standings</a>
+              <a href={`//${contest.link}`} target="_blank">
+                Standings
+              </a>
               <br />
               {isAdmin && (
                 <button

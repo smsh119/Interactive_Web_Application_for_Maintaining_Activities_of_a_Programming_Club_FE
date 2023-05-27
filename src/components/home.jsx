@@ -119,27 +119,41 @@ const renderFooter = () => {
           <div className="col-md-4 footerSection">
             <h4>Quick Links</h4>
             <div>
-              <Link className="footerLinks">-Faculty Members</Link>
-              <Link className="footerLinks">-Officers</Link>
-              <Link className="footerLinks">-Staff List</Link>
-              <Link className="footerLinks">-Department Notices</Link>
-              <Link className="footerLinks">-Events</Link>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Faculty Members
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Officers
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Staff List
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Department Notices
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Events
+              </a>
             </div>
           </div>
           <div className="col-md-4 footerSection">
             <h4>Important Links</h4>
             <div>
-              <Link className="footerLinks">
+              <a href={`//google.com`} target="_blank" className="footerLinks">
                 -University Grants Commision(UGC)
-              </Link>
-              <Link className="footerLinks">
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
                 -Bangladesh Research and Education Network (BdREN)
-              </Link>
-              <Link className="footerLinks">-BdREN ZOOMt</Link>
-              <Link className="footerLinks">-Google Classroom</Link>
-              <Link className="footerLinks">
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -BdREN ZOOMt
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
+                -Google Classroom
+              </a>
+              <a href={`//google.com`} target="_blank" className="footerLinks">
                 -Plagarism Detection Software | Thenticate
-              </Link>
+              </a>
             </div>
           </div>
         </div>

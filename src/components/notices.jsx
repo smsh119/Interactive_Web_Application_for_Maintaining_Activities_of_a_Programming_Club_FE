@@ -102,7 +102,9 @@ function Notices(props) {
                   <br />
                   <p>
                     <span>Link :</span>
-                    <a href={notice.link}>{notice.link}</a>
+                    <a href={`//${notice.link}`} target="_blank">
+                      {notice.link}
+                    </a>
                   </p>
                   <br />
                   <img src="" alt="" />
