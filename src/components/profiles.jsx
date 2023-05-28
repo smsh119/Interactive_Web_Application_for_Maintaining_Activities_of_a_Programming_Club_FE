@@ -17,9 +17,11 @@ function Profiles(props) {
   const [profilePicture, setProfilePicture] = useState("");
   const user = auth.getCurrentUser();
   const userId = params.id;
-  const ownProfile = user.profileId === userId || userId === "me";
+  const ownProfile = user
+    ? user.profileId === userId || userId === "me"
+    : false;
 
-  if (!user.isUpdated) return <ProfileUpdateUser />;
+  if (user && !user.isUpdated) return <ProfileUpdateUser />;
 
   useEffect(() => {
     async function fetchData() {
@@ -102,7 +104,7 @@ function Profiles(props) {
           <h3>{profileInfo.name}</h3>
           <h5>
             <span>ID: </span>
-            {user.sid}
+            {/* {user.sid} ------------------------change user.sid to profileInfo.sid*/}
           </h5>
           {ownProfile && (
             <button

@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import auth from "./services/authService";
 import ContestForm from "./components/contestForm";
 import ProfileForm from "./components/profileForm";
+import AboutEditForm from "./components/aboutEditForm";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/contestHIstory/contestForm" element={<ContestForm />} />
           <Route path="/photoGallery" element={<PhotoGallery />} />
           <Route path="/about" element={<About />} />
+          <Route path="/about/edit" element={<AboutEditForm />} />
           <Route path="/signIn" element={<SignInForm />} />
           <Route path="/signUp" element={<SignUpForm />} />
           <Route path="/notices" element={<Notices />} />

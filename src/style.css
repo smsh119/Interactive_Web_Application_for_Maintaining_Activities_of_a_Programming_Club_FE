@@ -15,6 +15,7 @@
 }
 body {
   margin-top: 70px;
+  position: relative;
 }
 p {
   margin: 0;
@@ -173,10 +174,13 @@ h2 {
 .introAndNotice .clubInto p {
   font-family: "Lilita One", cursive;
   text-align: justify;
-  margin-bottom: 20px;
+}
+.introAndNotice .clubInto ul li {
+  font-family: "Lilita One", cursive;
+  text-align: justify;
 }
 .introAndNotice .noticeboard {
-  height: 300px;
+  height: 400px;
   overflow-y: auto;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -548,4 +552,58 @@ h2 {
 }
 .programmersListDiv a:hover {
   background-color: #c2f1f7;
+}
+
+/* -----------------about page----------- */
+
+.aboutWrap {
+  color: #189ab4;
+  padding: 0px 20px;
+}
+.aboutWrap h1 {
+  text-align: center;
+}
+.aboutWrap h2 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  display: inline-block;
+}
+.aboutWrap h4 {
+  margin: 0.5em 0em;
+}
+.aboutWrap p {
+  text-align: justify;
+  padding: 0px 0px 0px 0.5em;
+  font-size: 1.2rem;
+}
+.aboutWrap ul {
+  padding: 0px 60px;
+  font-size: 1.2rem;
+}
+.aboutWrap span {
+  color: #05445e;
+  font-weight: bold;
+}
+.aboutWrap h3 {
+  text-align: center;
+  margin-top: 2em;
+  font-size: 1rem;
+}
+
+.aboutWrap button {
+  margin-left: 10px;
+  padding: 0.2em 1em;
+}
+
+@media (max-width: 991px) {
+  .aboutWrap p {
+    font-size: 0.75rem;
+  }
+  .aboutWrap ul {
+    padding: 0px 60px;
+    font-size: 0.75rem;
+  }
+  .aboutWrap h2 {
+    font-size: 1.2rem;
+  }
 }
