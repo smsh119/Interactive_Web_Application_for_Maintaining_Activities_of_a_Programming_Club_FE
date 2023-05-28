@@ -3,7 +3,7 @@ import Form from "./common/form";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
-import http from "../services/httpService";
+import { getInfo, saveInfo } from "../services/aboutService";
 
 class AboutEditFormC extends Form {
   state = {
@@ -60,7 +60,7 @@ class AboutEditFormC extends Form {
 
   async populateInfo() {
     try {
-      const { data } = await http.get("/about");
+      const { data } = await getInfo();
       if (data.length === 0) return;
       const x = this.mapToViewModel(data[data.length - 1]);
       // console.log(x);
@@ -133,9 +133,9 @@ class AboutEditFormC extends Form {
   doSubmit = async () => {
     const { data } = this.state;
     const obj = this.mapToRequestModel(data);
-    console.log(obj);
+    // console.log(obj);
     try {
-      await http.post("/about", obj);
+      await saveInfo(obj);
       const navigate = this.props.navigate;
       navigate("/about");
     } catch (error) {
