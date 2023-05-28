@@ -517,3 +517,34 @@ h2 {
   margin-right: 10px;
   cursor: pointer;
 }
+
+/* --------------------programmers list-------------------------- */
+
+.programmersListDiv {
+  padding: 0px 30px;
+  text-align: center;
+  margin-top: 100px;
+}
+.programmersListDiv th {
+  color: #05445e;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.programmersListDiv td {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #096f9b;
+}
+
+.programmersListDiv a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #096f9b;
+  background-color: #d4f1f4;
+  padding: 0.3em 0.5em;
+  border-radius: 0.3em;
+}
+.programmersListDiv a:hover {
+  background-color: #c2f1f7;
+}

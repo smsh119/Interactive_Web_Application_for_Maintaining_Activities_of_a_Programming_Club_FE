@@ -54,6 +54,19 @@ function ContestHistory(props) {
     setContests(conts);
   };
 
+  //error handling for image if not present in local
+  // const getImg = async (link) => {
+  //   try {
+  //     const imgUrl = getImgUrl(link);
+  //     const { data } = await http.get(imgUrl);
+  //     // console.log(data);
+  //     console.log(imgUrl);
+  //     return imgUrl;
+  //   } catch (error) {
+  //     if (error.response.status === 404) toast.error("Image not found!");
+  //   }
+  // };
+
   if (loading) return; // to fix the async works in use effect
 
   return (
