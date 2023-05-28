@@ -9,9 +9,13 @@ class AboutEditFormC extends Form {
   state = {
     data: {
       president: "",
+      presidentDesignation: "",
       vicePresident1: "",
+      vicePresident1Designation: "",
       vicePresident2: "",
+      vicePresident2Designation: "",
       treasurer: "",
+      treasurerDesignation: "",
       generalSecretary: "",
       assistantGeneralSecretary: "",
       officeSecretary: "",
@@ -28,10 +32,14 @@ class AboutEditFormC extends Form {
 
   schema = {
     _id: Joi.optional(),
-    president: Joi.string().required().label("President"),
-    vicePresident1: Joi.string().required().label("Vice President-1"),
-    vicePresident2: Joi.string().required().label("Vice President-2"),
-    treasurer: Joi.string().required().label("Treasurer"),
+    president: Joi.string().required().label("Name"),
+    presidentDesignation: Joi.string().required().label("Designation"),
+    vicePresident1: Joi.string().required().label("Name"),
+    vicePresident1Designation: Joi.string().required().label("Designation"),
+    vicePresident2: Joi.string().required().label("Name"),
+    vicePresident2Designation: Joi.string().required().label("Designation"),
+    treasurer: Joi.string().required().label("Name"),
+    treasurerDesignation: Joi.string().required().label("Designation"),
     generalSecretary: Joi.string().required().label("General Secretary"),
     assistantGeneralSecretary: Joi.string()
       .required()
@@ -80,10 +88,16 @@ class AboutEditFormC extends Form {
   mapToViewModel(response) {
     const obj = {
       _id: response._id,
-      president: response.committee.president,
-      vicePresident1: response.committee.vicePresident1,
-      vicePresident2: response.committee.vicePresident2,
-      treasurer: response.committee.treasurer,
+      president: response.committee.president.name,
+      vicePresident1: response.committee.vicePresident1.name,
+      vicePresident2: response.committee.vicePresident2.name,
+      treasurer: response.committee.treasurer.name,
+
+      presidentDesignation: response.committee.president.designation,
+      vicePresident1Designation: response.committee.vicePresident1.designation,
+      vicePresident2Designation: response.committee.vicePresident2.designation,
+      treasurerDesignation: response.committee.treasurer.designation,
+
       generalSecretary: response.studentCommittee.generalSecretary,
       assistantGeneralSecretary:
         response.studentCommittee.assistantGeneralSecretary,
@@ -107,10 +121,22 @@ class AboutEditFormC extends Form {
   mapToRequestModel(data) {
     const obj = {
       committee: {
-        president: data.president,
-        vicePresident1: data.vicePresident1,
-        vicePresident2: data.vicePresident2,
-        treasurer: data.treasurer,
+        president: {
+          name: data.president,
+          designation: data.presidentDesignation,
+        },
+        vicePresident1: {
+          name: data.vicePresident1,
+          designation: data.vicePresident1Designation,
+        },
+        vicePresident2: {
+          name: data.vicePresident2,
+          designation: data.vicePresident2Designation,
+        },
+        treasurer: {
+          name: data.treasurer,
+          designation: data.treasurerDesignation,
+        },
       },
       studentCommittee: {
         generalSecretary: data.generalSecretary,
@@ -126,7 +152,7 @@ class AboutEditFormC extends Form {
       },
     };
 
-    // if (data._id) obj._id = data._id;
+    if (data._id) obj._id = data._id;
     return obj;
   }
 
@@ -150,10 +176,18 @@ class AboutEditFormC extends Form {
         <h1>Update Profile</h1>
         <form onSubmit={this.handleSubmit}>
           <h2>Committee:</h2>
-          {this.renderInput("president", "President")}
-          {this.renderInput("vicePresident1", "Vice President-1")}
-          {this.renderInput("vicePresident2", "Vice President-2")}
-          {this.renderInput("treasurer", "Treasurer")}
+          <h4>President:</h4>
+          {this.renderInput("president", "Name")}
+          {this.renderInput("presidentDesignation", "Designation")}
+          <h4>Vice President 1:</h4>
+          {this.renderInput("vicePresident1", "Name")}
+          {this.renderInput("vicePresident1Designation", "Designation")}
+          <h4>Vice President 2:</h4>
+          {this.renderInput("vicePresident2", "Name")}
+          {this.renderInput("vicePresident2Designation", "Designation")}
+          <h4>treasurer</h4>
+          {this.renderInput("treasurer", "Name")}
+          {this.renderInput("treasurerDesignation", "Designation")}
           <h2>Student Committee:</h2>
           {this.renderInput("generalSecretary", "General Secretary")}
           {this.renderInput(

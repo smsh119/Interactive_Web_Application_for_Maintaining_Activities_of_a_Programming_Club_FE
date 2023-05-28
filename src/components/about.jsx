@@ -87,26 +87,34 @@ function About(props) {
       <div>
         <h4>President:</h4>
 
-        <p>
-          &#x2022; <span>{info && info.committee.president}</span> Chairman,
-          Dept. of ICE, RU
-        </p>
+        {info && (
+          <p>
+            &#x2022; <span>{info.committee.president.name}, </span>
+            {info.committee.president.designation}
+          </p>
+        )}
 
         <h4>Vice President:</h4>
-        <p>
-          &#x2022; <span>{info && info.committee.vicePresident1}</span>{" "}
-          Associate Professor, Dept. of ICE, RU
-        </p>
-        <p>
-          &#x2022; <span>{info && info.committee.vicePresident2}</span>{" "}
-          Assistant Professor, Dept. of ICE, RU
-        </p>
+        {info && (
+          <p>
+            &#x2022; <span>{info.committee.vicePresident1.name}, </span>
+            {info.committee.vicePresident1.designation}
+          </p>
+        )}
+        {info && (
+          <p>
+            &#x2022; <span>{info.committee.vicePresident2.name}, </span>
+            {info.committee.vicePresident2.designation}
+          </p>
+        )}
 
         <h4>Tresurer:</h4>
-        <p>
-          &#x2022; <span>{info && info.committee.treasurer}</span> Associate
-          Professor, Dept. of ICE, RU
-        </p>
+        {info && (
+          <p>
+            &#x2022; <span>{info.committee.treasurer.name}, </span>
+            {info.committee.treasurer.designation}
+          </p>
+        )}
       </div>
       <div>
         <h2>Student Executive Member</h2>
