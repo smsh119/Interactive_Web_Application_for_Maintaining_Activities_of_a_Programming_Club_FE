@@ -11,7 +11,7 @@ class ProgrammersList extends Component {
   state = {
     programmers: [],
     currentPage: 1,
-    pageSize: 4,
+    pageSize: 2,
     searchQuery: "",
     sortColumn: { path: "name", order: "asc" },
   };
