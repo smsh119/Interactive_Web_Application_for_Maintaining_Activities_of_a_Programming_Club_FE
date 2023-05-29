@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import auth from "../services/authService";
-import img1 from "../assets/img1.jpg";
 import divider from "../assets/divider.png";
 import {
   deleteContest,

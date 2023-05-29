@@ -616,6 +616,39 @@ h2 {
   position: relative;
   margin: 0 auto;
 }
+.galleryContainer button {
+  position: sticky;
+  top: 70px;
+  z-index: 200;
+  border: 2px solid #fff;
+}
+
+.galleryContainer .galleryFrom {
+  width: 30vw;
+  border: 5px solid #05445e;
+  padding: 30px;
+  position: fixed;
+  border-radius: 30px;
+  z-index: 200;
+  background-color: rgba(255, 255, 255, 0.8);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.galleryContainer .galleryFrom:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.galleryContainer .galleryFrom span {
+  position: absolute;
+  top: 5px;
+  right: 20px;
+  font-size: 50px;
+  font-weight: bolder;
+  z-index: 100;
+  cursor: pointer;
+  color: #05445e;
+  user-select: none;
+}
 
 .galleryContainer .media-container {
   display: grid;
