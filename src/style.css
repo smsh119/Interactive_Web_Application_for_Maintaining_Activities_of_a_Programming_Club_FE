@@ -679,6 +679,7 @@ h2 {
   left: 0;
   background-color: rgba(255, 255, 255, 0.6);
   height: 100%;
+  width: 100%;
   color: #05445e;
   font-weight: bold;
   text-align: justify;
@@ -687,6 +688,7 @@ h2 {
   align-items: center;
   padding: 15px 15px;
   transition: all 0.3 linear;
+  overflow-y: auto;
 }
 .galleryContainer .media-container .media h5 {
   font-weight: bold;

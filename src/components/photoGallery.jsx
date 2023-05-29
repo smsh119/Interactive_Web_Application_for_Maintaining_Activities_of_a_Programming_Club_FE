@@ -52,9 +52,7 @@ function PhotoGallery(props) {
                   display: showDes === file.photoLink ? "block" : "none",
                 }}
               >
-                <h5>
-                  This is a heading i am righting for testing and it overflows
-                </h5>
+                <h5>{file.heading}</h5>
                 {file.description}
               </div>
             </div>

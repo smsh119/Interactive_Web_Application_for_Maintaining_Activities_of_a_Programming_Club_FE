@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 class PhotoGalleryFormC extends Form {
   state = {
     data: {
-      //   header: "",
+      heading: "",
       description: "",
       photo: null,
     },
@@ -18,15 +18,15 @@ class PhotoGalleryFormC extends Form {
 
   schema = {
     _id: Joi.string(),
-    // header: Joi.string().required().max(100).label("Title"),
-    description: Joi.string().required().max(300).label("Description"),
+    heading: Joi.string().required().max(100).label("Title"),
+    description: Joi.string().required().max(250).label("Description"),
     photo: Joi.object().required(),
   };
 
   mapToViewModel = (data) => {
     const formData = new FormData();
 
-    // formData.append("header", data.header);
+    formData.append("heading", data.heading);
     formData.append("description", data.description);
     formData.append("photo", data.photo);
 
@@ -34,9 +34,6 @@ class PhotoGalleryFormC extends Form {
   };
 
   doSubmit = async () => {
-    const date = this.state.data.date;
-    const ddate = dayjs(date).toISOString();
-    this.setState({ date: ddate });
     const data = this.mapToViewModel(this.state.data);
 
     // for (var pair of data.entries()) {
@@ -45,7 +42,6 @@ class PhotoGalleryFormC extends Form {
 
     try {
       await addPhoto(data);
-      //   const navigate = this.props.navigate;
       window.location = "/photoGallery";
     } catch (e) {
       console.log(e);
@@ -58,7 +54,7 @@ class PhotoGalleryFormC extends Form {
         <span onClick={this.props.onClose}>&times;</span>
         <h1>Add Photo</h1>
         <form onSubmit={this.handleSubmit}>
-          {/* {this.renderInput("header", "Title")} */}
+          {this.renderInput("heading", "Heading")}
           {this.renderInput("description", "Descripition")}
           {this.renderSelectFile("photo", "Select Photo")}
 
