@@ -92,7 +92,6 @@ class AboutEditFormC extends Form {
       const { data } = await getInfo();
       if (data.length === 0) return;
       const x = this.mapToViewModel(data[data.length - 1]);
-      // console.log(x);
       this.setState({ data: x });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
@@ -232,7 +231,6 @@ class AboutEditFormC extends Form {
   doSubmit = async () => {
     const { data } = this.state;
     const obj = this.mapToRequestModel(data);
-    console.log(obj);
     try {
       await saveInfo(obj);
       const navigate = this.props.navigate;

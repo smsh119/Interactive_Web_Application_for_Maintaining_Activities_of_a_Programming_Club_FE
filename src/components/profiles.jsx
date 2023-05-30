@@ -66,10 +66,6 @@ function Profiles(props) {
   };
 
   if (loading) return null;
-  // console.log("user id : ", user._id);
-  // console.log("profile id : ", user.profileId);
-  // console.log("profile id frm profile : ", profileInfo._id);
-  // console.log("params id : ", userId);
   // console.log(profileInfo);
   return (
     <div className="profileWrap">

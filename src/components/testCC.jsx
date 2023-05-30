@@ -5,6 +5,14 @@ import Form from "./common/form";
 
 class TestCC extends Component {
   render() {
+    const obj = {
+      paricipant1: "asdfsdaf",
+      profileId: "asdfasfasd",
+    };
+    const str = JSON.stringify(obj);
+    const obj2 = JSON.parse(str);
+
+    console.log(obj2);
     function handleChange(e) {
       console.log(e);
     }

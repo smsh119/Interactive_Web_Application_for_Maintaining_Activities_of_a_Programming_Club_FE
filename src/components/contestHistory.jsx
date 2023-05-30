@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../services/authService";
 import divider from "../assets/divider.png";
 import {
@@ -15,15 +15,26 @@ import getImgUrl from "../services/imgService";
 function ContestHistory(props) {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showRequests, setShowRequests] = useState(false);
+
   const navigate = useNavigate();
+
   let isAdmin = auth.getCurrentUser() ? auth.getCurrentUser().isAdmin : false;
+  let isSuperAdmin = auth.getCurrentUser()
+    ? auth.getCurrentUser().isSuperAdmin
+    : false;
 
   useEffect(() => {
     async function fetchData() {
-      const { data: consts } = await getContests();
-      consts.reverse();
-      setContests(consts);
-      setLoading(false);
+      try {
+        await getContests();
+        const { data: consts } = await getContests();
+        consts.reverse();
+        setContests(consts);
+        setLoading(false);
+      } catch (e) {
+        console.log(e.response.status);
+      }
     }
     fetchData();
   }, []);
@@ -53,35 +64,35 @@ function ContestHistory(props) {
     setContests(conts);
   };
 
-  //error handling for image if not present in local
-  // const getImg = async (link) => {
-  //   try {
-  //     const imgUrl = getImgUrl(link);
-  //     const { data } = await http.get(imgUrl);
-  //     // console.log(data);
-  //     console.log(imgUrl);
-  //     return imgUrl;
-  //   } catch (error) {
-  //     if (error.response.status === 404) toast.error("Image not found!");
-  //   }
-  // };
-
-  if (loading) return; // to fix the async works in use effect
+  if (loading) return;
 
   return (
     <div className="mb-5 contestHistoryWrapper">
       <h1>Contest History</h1>
       {auth.getCurrentUser() && (
-        <button
-          className="btn btn-lg custom-btn"
-          onClick={() => navigate("/contestHistory/contestForm")}
-        >
-          Add Contest
-        </button>
+        <div>
+          <button
+            className="btn btn-lg custom-btn"
+            onClick={() => navigate("/contestHistory/contestForm")}
+          >
+            Add Contest
+          </button>
+          <button
+            className="btn btn-lg custom-btn contestHistoryReqBtn"
+            onClick={() => setShowRequests(!showRequests)}
+          >
+            {showRequests ? "Approved Contests" : "Requests"}
+          </button>
+        </div>
       )}
 
       {contests.map((contest) => {
         if (!isAdmin && !contest.isApproved) return;
+        if (
+          (contest.isApproved && showRequests) ||
+          (!contest.isApproved && !showRequests)
+        )
+          return;
         return (
           <div key={contest._id} className="row contestCard">
             {isAdmin && !contest.isApproved && (
@@ -112,11 +123,26 @@ function ContestHistory(props) {
             </div>
             <div className="col-lg contestCardDesDiv">
               <h1>{contest.header}</h1>
+              <h4>
+                Contest Type: <span>{contest.contestType}</span>
+              </h4>
               <h4>Participants:</h4>
               <ul>
-                <li>{contest.participant1}</li>
-                <li>{contest.participant2}</li>
-                <li>{contest.participant3}</li>
+                <li>
+                  <Link to={"/profiles/" + contest.participant1.profileId}>
+                    {contest.participant1.name}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/profiles/" + contest.participant2.profileId}>
+                    {contest.participant2.name}
+                  </Link>
+                </li>
+                <li>
+                  <Link to={"/profiles/" + contest.participant3.profileId}>
+                    {contest.participant3.name}
+                  </Link>
+                </li>
               </ul>
               <p>
                 <span>Description : </span> {contest.description}
@@ -130,7 +156,7 @@ function ContestHistory(props) {
                 Standings
               </a>
               <br />
-              {isAdmin && (
+              {isAdmin && isSuperAdmin && (
                 <button
                   className="btn btn-danger btn-lg"
                   onClick={() => handleDelete(contest)}

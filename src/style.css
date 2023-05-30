@@ -331,6 +331,10 @@ h2 {
   /* padding: 0px 30px; */
 }
 
+.contestHistoryWrapper .contestHistoryReqBtn {
+  float: right;
+}
+
 .contestCard {
   background-color: #d4f1f4;
   padding: 30px 10px;
@@ -399,6 +403,19 @@ h2 {
   font-weight: bold;
   font-size: 1.1rem;
 }
+.contestCard .contestCardDesDiv ul li a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 0;
+  background-color: inherit;
+  color: #05445e;
+}
+.contestCard .contestCardDesDiv ul li a:hover {
+  text-decoration: none;
+  padding: 0;
+  background-color: inherit;
+  color: #189ab4;
+}
 .contestCard .contestCardDesDiv p {
   margin-bottom: 20px;
   color: #05445e;
@@ -417,6 +434,7 @@ h2 {
   border-radius: 0.4em;
   text-decoration: none;
 }
+
 .contestCard .contestCardDesDiv a:hover {
   background-color: #096f9b;
 }

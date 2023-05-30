@@ -12,8 +12,11 @@ class ContestFormC extends Form {
       header: "",
       date: dayjs(new Date()).toISOString(),
       participant1: "",
+      participant1ProfileId: "",
       participant2: "",
+      participant2ProfileId: "",
       participant3: "",
+      participant3ProfileId: "",
       description: "",
       rank: "",
       link: "",
@@ -22,6 +25,7 @@ class ContestFormC extends Form {
       img3: null,
       img4: null,
       isApproved: false,
+      contestType: "",
     },
     errors: {},
   };
@@ -33,6 +37,9 @@ class ContestFormC extends Form {
     participant1: Joi.string().min(3).label("Participant Name"),
     participant2: Joi.string().min(3).label("Participant Name"),
     participant3: Joi.string().min(3).label("Participant Name"),
+    participant1ProfileId: Joi.string().optional(),
+    participant2ProfileId: Joi.string().optional(),
+    participant3ProfileId: Joi.string().optional(),
     description: Joi.string().required().min(10).label("Description"),
     rank: Joi.string().required().min(1),
     link: Joi.optional().label("Link"),
@@ -41,26 +48,28 @@ class ContestFormC extends Form {
     img3: Joi.object().required(),
     img4: Joi.object().required(),
     isApproved: Joi.boolean().required(),
+    contestType: Joi.string().required().label("Contest Type"),
   };
 
-  //         imgLink: Joi.array().items(Joi.string()),
-  //         header : Joi.string().min(10).required(),
-  //         participant: Joi.array().items(Joi.string()),
-  //         description: Joi.string().min(10).required(),
-  //         rank: Joi.string().min(1).required(),
-  //         link: Joi.optional()
-
-  //   mapToViewModel(data) {
-  //     return
-  //   }
-
-  mapToViewModel = (data) => {
+  mapToRequestModel = (data) => {
     const formData = new FormData();
+    const participant1Obj = {
+      name: data.participant1,
+      profileId: data.participant1ProfileId,
+    };
+    const participant2Obj = {
+      name: data.participant2,
+      profileId: data.participant2ProfileId,
+    };
+    const participant3Obj = {
+      name: data.participant3,
+      profileId: data.participant3ProfileId,
+    };
 
     formData.append("header", data.header);
-    formData.append("participant1", data.participant1);
-    formData.append("participant2", data.participant2);
-    formData.append("participant3", data.participant3);
+    formData.append("participant1", JSON.stringify(participant1Obj));
+    formData.append("participant2", JSON.stringify(participant2Obj));
+    formData.append("participant3", JSON.stringify(participant3Obj));
     formData.append("description", data.description);
     formData.append("rank", data.rank.toString());
     formData.append("link", data.link);
@@ -70,21 +79,19 @@ class ContestFormC extends Form {
     formData.append("img4", data.img4);
     formData.append("isApproved", data.isApproved);
     formData.append("date", data.date);
+    formData.append("contestType", data.contestType);
 
     return formData;
   };
 
   doSubmit = async () => {
-    //work remaining;
     const date = this.state.data.date;
     const ddate = dayjs(date).toISOString();
     this.setState({ date: ddate });
-    const data = this.mapToViewModel(this.state.data);
-
+    const data = this.mapToRequestModel(this.state.data);
     // for (var pair of data.entries()) {
     //   console.log(pair[0] + ", " + pair[1]);
     // }
-
     try {
       await addContest(data);
       const navigate = this.props.navigate;
@@ -102,12 +109,17 @@ class ContestFormC extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("header", "Title")}
           {this.renderDate("date", "Contest Date", "date")}
-          {this.renderInput("participant1", "Particiant 1 Name")}
-          {this.renderInput("participant2", "Particiant 2 Name")}
-          {this.renderInput("participant3", "Particiant 3 Name")}
+          {this.renderUserSelector("participant1", "Particiant 1")}
+          {this.renderUserSelector("participant2", "Particiant 2")}
+          {this.renderUserSelector("participant3", "Particiant 3")}
           {this.renderInput("description", "Descripition")}
           {this.renderInput("rank", "Rank", "number")}
           {this.renderInput("link", "Standing Link")}
+          {this.renderSelect("contestType", "Contest Type", [
+            { _id: "ICPC", name: "ICPC" },
+            { _id: "IUPC", name: "IUPC" },
+            { _id: "IDPC", name: "IDPC" },
+          ])}
           {this.renderSelectFile("img1", "Image 1")}
           {this.renderSelectFile("img2", "Image 2")}
           {this.renderSelectFile("img3", "Image 3")}
