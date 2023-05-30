@@ -4,6 +4,7 @@ import Joi from "joi-browser";
 import Select from "./select";
 import dayjs from "dayjs";
 import http from "../../services/httpService";
+import UserSelector from "../userSelector";
 class Form extends Component {
   state = {
     data: {},
@@ -59,6 +60,20 @@ class Form extends Component {
     if (input.name === "programDate")
       data[input.name] = dayjs(input.value).toISOString();
     else data[input.name] = input.value;
+    this.setState({ data, errors });
+  };
+
+  handleChangeForUserSelector = (e, name) => {
+    // console.log(e);
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty({ name: name, value: e.name });
+    if (errorMessage) errors[name] = errorMessage;
+    else delete errors[name];
+
+    const data = { ...this.state.data };
+    data[name] = e.name;
+    data[name + "ProfileId"] = e.profileId;
+    // console.log(data);
     this.setState({ data, errors });
   };
 
@@ -137,6 +152,18 @@ class Form extends Component {
           type="file"
           onChange={this.handleImg}
           className="form-control"
+        />
+      </div>
+    );
+  }
+
+  renderUserSelector(name, label) {
+    return (
+      <div>
+        <p>{label}</p>
+        <UserSelector
+          onChange={(e) => this.handleChangeForUserSelector(e, name)}
+          error={this.state.errors[name]}
         />
       </div>
     );

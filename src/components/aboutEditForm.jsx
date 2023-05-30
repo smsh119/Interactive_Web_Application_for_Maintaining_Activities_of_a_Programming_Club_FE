@@ -26,8 +26,19 @@ class AboutEditFormC extends Form {
       assistantPublicationSecretary: "",
       socialWelfareSecretary: "",
       assistantSocialWelfareSecretary: "",
+      generalSecretaryProfileId: "",
+      assistantGeneralSecretaryProfileId: "",
+      officeSecretaryProfileId: "",
+      assistantOfficeSecretaryProfileId: "",
+      financeSecretaryProfileId: "",
+      assistantFinanceSecretaryProfileId: "",
+      publicationSecretaryProfileId: "",
+      assistantPublicationSecretaryProfileId: "",
+      socialWelfareSecretaryProfileId: "",
+      assistantSocialWelfareSecretaryProfileId: "",
     },
     errors: {},
+    users: {},
   };
 
   schema = {
@@ -64,6 +75,16 @@ class AboutEditFormC extends Form {
     assistantSocialWelfareSecretary: Joi.string()
       .required()
       .label("Assistant Social Welfare Secretary"),
+    generalSecretaryProfileId: Joi.optional(),
+    assistantGeneralSecretaryProfileId: Joi.optional(),
+    officeSecretaryProfileId: Joi.optional(),
+    assistantOfficeSecretaryProfileId: Joi.optional(),
+    financeSecretaryProfileId: Joi.optional(),
+    assistantFinanceSecretaryProfileId: Joi.optional(),
+    publicationSecretaryProfileId: Joi.optional(),
+    assistantPublicationSecretaryProfileId: Joi.optional(),
+    socialWelfareSecretaryProfileId: Joi.optional(),
+    assistantSocialWelfareSecretaryProfileId: Joi.optional(),
   };
 
   async populateInfo() {
@@ -98,21 +119,43 @@ class AboutEditFormC extends Form {
       vicePresident2Designation: response.committee.vicePresident2.designation,
       treasurerDesignation: response.committee.treasurer.designation,
 
-      generalSecretary: response.studentCommittee.generalSecretary,
-      assistantGeneralSecretary:
-        response.studentCommittee.assistantGeneralSecretary,
-      officeSecretary: response.studentCommittee.officeSecretary,
-      assistantOfficeSecretary:
-        response.studentCommittee.assistantOfficeSecretary,
-      financeSecretary: response.studentCommittee.financeSecretary,
-      assistantFinanceSecretary:
-        response.studentCommittee.assistantFinanceSecretary,
-      publicationSecretary: response.studentCommittee.publicationSecretary,
-      assistantPublicationSecretary:
-        response.studentCommittee.assistantPublicationSecretary,
-      socialWelfareSecretary: response.studentCommittee.socialWelfareSecretary,
-      assistantSocialWelfareSecretary:
-        response.studentCommittee.assistantSocialWelfareSecretary,
+      // generalSecretary: response.studentCommittee.generalSecretary.name,
+      // assistantGeneralSecretary:
+      //   response.studentCommittee.assistantGeneralSecretary.name,
+      // officeSecretary: response.studentCommittee.officeSecretary.name,
+      // assistantOfficeSecretary:
+      //   response.studentCommittee.assistantOfficeSecretary.name,
+      // financeSecretary: response.studentCommittee.financeSecretary.name,
+      // assistantFinanceSecretary:
+      //   response.studentCommittee.assistantFinanceSecretary.name,
+      // publicationSecretary: response.studentCommittee.publicationSecretary.name,
+      // assistantPublicationSecretary:
+      //   response.studentCommittee.assistantPublicationSecretary.name,
+      // socialWelfareSecretary:
+      //   response.studentCommittee.socialWelfareSecretary.name,
+      // assistantSocialWelfareSecretary:
+      //   response.studentCommittee.assistantSocialWelfareSecretary.name,
+
+      generalSecretaryProfileId:
+        response.studentCommittee.generalSecretary.profileId,
+      assistantGeneralSecretaryProfileId:
+        response.studentCommittee.assistantGeneralSecretary.profileId,
+      officeSecretaryProfileId:
+        response.studentCommittee.officeSecretary.profileId,
+      assistantOfficeSecretaryProfileId:
+        response.studentCommittee.assistantOfficeSecretary.profileId,
+      financeSecretaryProfileId:
+        response.studentCommittee.financeSecretary.profileId,
+      assistantFinanceSecretaryProfileId:
+        response.studentCommittee.assistantFinanceSecretary.profileId,
+      publicationSecretaryProfileId:
+        response.studentCommittee.publicationSecretary.profileId,
+      assistantPublicationSecretaryProfileId:
+        response.studentCommittee.assistantPublicationSecretary.profileId,
+      socialWelfareSecretaryProfileId:
+        response.studentCommittee.socialWelfareSecretary.profileId,
+      assistantSocialWelfareSecretaryProfileId:
+        response.studentCommittee.assistantSocialWelfareSecretary.profileId,
     };
     // console.log(obj);
     return obj;
@@ -139,16 +182,46 @@ class AboutEditFormC extends Form {
         },
       },
       studentCommittee: {
-        generalSecretary: data.generalSecretary,
-        assistantGeneralSecretary: data.assistantGeneralSecretary,
-        officeSecretary: data.officeSecretary,
-        assistantOfficeSecretary: data.assistantOfficeSecretary,
-        financeSecretary: data.financeSecretary,
-        assistantFinanceSecretary: data.assistantFinanceSecretary,
-        publicationSecretary: data.publicationSecretary,
-        assistantPublicationSecretary: data.assistantPublicationSecretary,
-        socialWelfareSecretary: data.socialWelfareSecretary,
-        assistantSocialWelfareSecretary: data.assistantSocialWelfareSecretary,
+        generalSecretary: {
+          name: data.generalSecretary,
+          profileId: data.generalSecretaryProfileId,
+        },
+        assistantGeneralSecretary: {
+          name: data.assistantGeneralSecretary,
+          profileId: data.assistantGeneralSecretaryProfileId,
+        },
+        officeSecretary: {
+          name: data.officeSecretary,
+          profileId: data.officeSecretaryProfileId,
+        },
+        assistantOfficeSecretary: {
+          name: data.assistantOfficeSecretary,
+          profileId: data.assistantOfficeSecretaryProfileId,
+        },
+        financeSecretary: {
+          name: data.financeSecretary,
+          profileId: data.financeSecretaryProfileId,
+        },
+        assistantFinanceSecretary: {
+          name: data.assistantFinanceSecretary,
+          profileId: data.assistantFinanceSecretaryProfileId,
+        },
+        publicationSecretary: {
+          name: data.publicationSecretary,
+          profileId: data.publicationSecretaryProfileId,
+        },
+        assistantPublicationSecretary: {
+          name: data.assistantPublicationSecretary,
+          profileId: data.assistantPublicationSecretaryProfileId,
+        },
+        socialWelfareSecretary: {
+          name: data.socialWelfareSecretary,
+          profileId: data.socialWelfareSecretaryProfileId,
+        },
+        assistantSocialWelfareSecretary: {
+          name: data.assistantSocialWelfareSecretary,
+          profileId: data.assistantSocialWelfareSecretaryProfileId,
+        },
       },
     };
 
@@ -159,7 +232,7 @@ class AboutEditFormC extends Form {
   doSubmit = async () => {
     const { data } = this.state;
     const obj = this.mapToRequestModel(data);
-    // console.log(obj);
+    console.log(obj);
     try {
       await saveInfo(obj);
       const navigate = this.props.navigate;
@@ -173,7 +246,7 @@ class AboutEditFormC extends Form {
   render() {
     return (
       <div className="mb-5">
-        <h1>Update Profile</h1>
+        <h1>Update About</h1>
         <form onSubmit={this.handleSubmit}>
           <h2>Committee:</h2>
           <h4>President:</h4>
@@ -189,31 +262,35 @@ class AboutEditFormC extends Form {
           {this.renderInput("treasurer", "Name")}
           {this.renderInput("treasurerDesignation", "Designation")}
           <h2>Student Committee:</h2>
-          {this.renderInput("generalSecretary", "General Secretary")}
-          {this.renderInput(
+
+          {this.renderUserSelector("generalSecretary", "General Secretary")}
+          {this.renderUserSelector(
             "assistantGeneralSecretary",
             "Assistant General Secretary"
           )}
-          {this.renderInput("officeSecretary", "Office Secretary")}
-          {this.renderInput(
+          {this.renderUserSelector("officeSecretary", "Office Secretary")}
+          {this.renderUserSelector(
             "assistantOfficeSecretary",
             "Assistant Office Secretary"
           )}
-          {this.renderInput("financeSecretary", "Finance Secretary")}
-          {this.renderInput(
+          {this.renderUserSelector("financeSecretary", "Finance Secretary")}
+          {this.renderUserSelector(
             "assistantFinanceSecretary",
             "Assistant Finance Secretary"
           )}
-          {this.renderInput("publicationSecretary", "Publication Secretary")}
-          {this.renderInput(
+          {this.renderUserSelector(
+            "publicationSecretary",
+            "Publication Secretary"
+          )}
+          {this.renderUserSelector(
             "assistantPublicationSecretary",
             "Assistant Publication Secretary"
           )}
-          {this.renderInput(
+          {this.renderUserSelector(
             "socialWelfareSecretary",
             "Social Welfare Secretary"
           )}
-          {this.renderInput(
+          {this.renderUserSelector(
             "assistantSocialWelfareSecretary",
             "Assistant Social Welfare Secretary"
           )}

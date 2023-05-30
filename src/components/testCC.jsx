@@ -1,19 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { Component, useRef, useState } from "react";
 import http from "../services/httpService";
+import UserSelector from "./userSelector";
+import Form from "./common/form";
 
-export function TestCC() {
-  const handleClick = async () => {
-    window.open("//google.com");
-  };
-
-  return (
-    <div>
-      <h1>test</h1>
-      <button className="btn btn-primary" onClick={handleClick}>
-        a button
-      </button>
-    </div>
-  );
+class TestCC extends Component {
+  render() {
+    function handleChange(e) {
+      console.log(e);
+    }
+    return (
+      <div>
+        <UserSelector onChange={handleChange} />
+      </div>
+    );
+  }
 }
 
 export default TestCC;

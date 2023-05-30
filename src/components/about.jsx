@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getInfo } from "../services/aboutService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function About(props) {
   const [info, setInfo] = useState();
@@ -128,43 +128,130 @@ function About(props) {
       <div>
         <p>
           <span>General Secretary: </span>
-          {info && info.studentCommittee.generalSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" + info.studentCommittee.generalSecretary.profileId
+              }
+            >
+              {info.studentCommittee.generalSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Assistant General Secretary: </span>
-          {info && info.studentCommittee.assistantGeneralSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.assistantGeneralSecretary.profileId
+              }
+            >
+              {info.studentCommittee.assistantGeneralSecretar}y.name
+            </Link>
+          )}
         </p>
         <p>
           <span>Office Secretary: </span>
-          {info && info.studentCommittee.officeSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" + info.studentCommittee.officeSecretary.profileId
+              }
+            >
+              {info.studentCommittee.officeSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Assistant Office Secretary: </span>
-          {info && info.studentCommittee.assistantOfficeSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.assistantOfficeSecretary.profileId
+              }
+            >
+              {info.studentCommittee.assistantOfficeSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Finance Secretary: </span>
-          {info && info.studentCommittee.financeSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" + info.studentCommittee.financeSecretary.profileId
+              }
+            >
+              {info.studentCommittee.financeSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Assistant Finance Secretary: </span>
-          {info && info.studentCommittee.assistantFinanceSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.assistantFinanceSecretary.profileId
+              }
+            >
+              {info.studentCommittee.assistantFinanceSecretar}y.name
+            </Link>
+          )}
         </p>
         <p>
           <span>Publication Secretary: </span>
-          {info && info.studentCommittee.publicationSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.publicationSecretary.profileId
+              }
+            >
+              {info.studentCommittee.publicationSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Assistant Publication Secretary: </span>
-          {info && info.studentCommittee.assistantPublicationSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.assistantPublicationSecretary.profileId
+              }
+            >
+              {info.studentCommittee.assistantPublicationSe}cretary.name
+            </Link>
+          )}
         </p>
         <p>
           <span>Social Welfare Secretary: </span>
-          {info && info.studentCommittee.socialWelfareSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.socialWelfareSecretary.profileId
+              }
+            >
+              {info.studentCommittee.socialWelfareSecretary.name}
+            </Link>
+          )}
         </p>
         <p>
           <span>Assistant Social Welfare Secretary: </span>
-          {info && info.studentCommittee.assistantSocialWelfareSecretary}
+          {info && (
+            <Link
+              to={
+                "/profiles/" +
+                info.studentCommittee.assistantSocialWelfareSecretary.profileId
+              }
+            >
+              {info.studentCommittee.assistantSocialWelfareSecretary.name}
+            </Link>
+          )}
         </p>
       </div>
 
