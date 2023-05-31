@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ruLogo from "../assets/ru-logo.png";
 import { Link } from "react-router-dom";
 import NoticeboardHome from "./noticeboardHome";
 import Footer from "./footer";
+import http from "../services/httpService";
 
 const renderWelcomeSection = () => {
   return (
@@ -28,28 +29,32 @@ const renderWelcomeSection = () => {
   );
 };
 
-const renderHomeCards = () => {
+const renderHomeCards = (info) => {
   return (
     <div className="homeCards">
       <div className="row">
-        <div className="col-md-2"></div>
+        <div className="col-md-1"></div>
         <div className="col-md-2 mx-1 homeCard ">
           <h4>Founded</h4>
           <p>1 January, 2015</p>
         </div>
         <div className="col-md-2 mx-1 homeCard">
           <h4>ICPC Participation</h4>
-          <p>6</p>
+          <p>{info.ICPC}</p>
         </div>
         <div className="col-md-2 mx-1 homeCard">
           <h4>IUPC Participation</h4>
-          <p>10</p>
+          <p>{info.IUPC}</p>
+        </div>
+        <div className="col-md-2 mx-1 homeCard ">
+          <h4>IDPC Participation</h4>
+          <p>{info.IDPC}</p>
         </div>
         <div className="col-md-2 mx-1 homeCard">
           <h4>Programmers</h4>
-          <p>121</p>
+          <p>{info.programmers}</p>
         </div>
-        <div className="col-md-2"></div>
+        <div className="col-md-1"></div>
       </div>
     </div>
   );
@@ -225,14 +230,28 @@ const renderFooter = () => {
 };
 
 function Home(props) {
+  const [info, setInfo] = useState();
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     document.title = "ICE_PC";
+    async function fetchData() {
+      try {
+        const { data: info } = await http.get("/homeData");
+        setInfo(info);
+        setLoading(false);
+      } catch (e) {
+        console.log(e.response);
+        window.location = "/notFound";
+      }
+    }
+    fetchData();
   }, []);
 
+  if (loading) return null;
   return (
     <>
       {renderWelcomeSection()}
-      {renderHomeCards()}
+      {renderHomeCards(info)}
       {renderIntroAndNotice()}
       {renderBigCards()}
       {renderFooter()}

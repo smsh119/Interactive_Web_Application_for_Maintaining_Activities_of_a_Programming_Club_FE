@@ -74,17 +74,13 @@ class ProgrammersList extends Component {
       );
     // console.log(filtered);
     const sorted = _.orderBy(filtered, sortColumn.path, sortColumn.order);
-    // console.log(sorted);
-    const programmers = paginate(sorted, currentPage, pageSize);
-    // console.log(programmers);
-    return { totalCount: filtered.length, data: programmers };
+    // const programmers = paginate(sorted, currentPage, pageSize);  //for pagination
+    return { totalCount: filtered.length, data: sorted };
   };
 
   render() {
     const { length: count } = this.state.programmers;
-
     const { pageSize, currentPage, sortColumn } = this.state;
-
     const { totalCount, data: programmers } = this.getPagedData();
 
     return (
@@ -100,12 +96,12 @@ class ProgrammersList extends Component {
           sortColumn={sortColumn}
           onSort={this.handleSort}
         />
-        <Pagination
+        {/* <Pagination
           itemsCount={totalCount}
           pageSize={pageSize}
           currentPage={currentPage}
           onPageChange={this.handlePageChange}
-        />
+        /> */}
       </div>
     );
   }

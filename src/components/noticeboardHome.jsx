@@ -27,7 +27,8 @@ const NoticeboardHome = (props) => {
           return (
             <div className="notice" key={notice._id}>
               <marquee>
-                {dayjs(notice.date).format("YYYY/MM/DD")} | {notice.header}
+                {dayjs(notice.date).format("YYYY/MM/DD hh:mm A")} |{" "}
+                {notice.header}
               </marquee>
             </div>
           );

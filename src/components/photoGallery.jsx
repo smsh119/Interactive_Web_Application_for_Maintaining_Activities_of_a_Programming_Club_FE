@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PhotoGalleryForm from "./photoGalleryForm";
 import { getPhotos } from "../services/galleryService";
 import getImgUrl from "../services/imgService";
+import ImagePopUp from "./imagePopUp";
 
 function PhotoGallery(props) {
   const [media, setMedia] = useState(null);
@@ -60,10 +61,7 @@ function PhotoGallery(props) {
         })}
       </div>
 
-      <div className="popup-media" style={{ display: file ? "block" : "none" }}>
-        <span onClick={() => setFile(null)}>&times;</span>
-        <img src={file && getImgUrl(file)} alt="" />
-      </div>
+      <ImagePopUp file={file} setFile={setFile} />
     </div>
   );
 }

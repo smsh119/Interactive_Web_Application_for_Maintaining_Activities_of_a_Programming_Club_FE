@@ -10,7 +10,7 @@ function UserSelector({ onChange, error }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await http.get("/programmers");
+        const { data } = await http.get("/programmers/list");
         setUsers(data);
         mapOptions(data);
         setLoading(false);

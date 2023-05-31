@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import profile_thumb from "../assets/profile_thumb.jpg";
 import { getProfile, addProfilePicture } from "../services/profileService";
+import { getContest } from "../services/contestService";
 import auth from "../services/authService";
+import divider from "../assets/divider.png";
 
 import { InputText } from "primereact/inputtext";
 import getImgUrl from "../services/imgService";
 import ProfileUpdateUser from "./profileUpdateUser";
+import dayjs from "dayjs";
+import { Link } from "react-router-dom";
+import ImagePopUp from "./imagePopUp";
 
 function Profiles(props) {
   const params = useParams();
@@ -15,6 +20,9 @@ function Profiles(props) {
   const [loading, setLoading] = useState(true);
   const [showUpdateImgBtn, setShowUpdateImgBtn] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
+  const [contests, setContests] = useState([]);
+  const [file, setFile] = useState(null); //for image pop up
+
   const user = auth.getCurrentUser();
   const userId = params.id;
   const ownProfile = user
@@ -28,9 +36,18 @@ function Profiles(props) {
       try {
         const { data: profile } = await getProfile(userId);
         setProfileInfo(profile);
+        // console.log(profile.contests[0]);
+        const conts = [];
+        for (let i = 0; i < profile.contests.length; i++) {
+          const { data } = await getContest(profile.contests[i]);
+          conts.push(data);
+        }
+        conts.reverse();
+        setContests(conts);
+        // console.log(conts);
         setLoading(false);
       } catch (e) {
-        console.log(e.response.status);
+        console.log(e.response);
         window.location = "/notFound";
       }
     }
@@ -62,11 +79,125 @@ function Profiles(props) {
   const handleImg = ({ currentTarget: input }) => {
     const img = input.files[0];
     setProfilePicture(img);
-    console.log(profilePicture);
+    // console.log(profilePicture);
+  };
+
+  const handleShowDetails = (contest) => {
+    const conts = [...contests];
+    let indx = conts.indexOf(contest);
+    conts[indx] = { ...conts[indx] };
+    for (let i = 0; i < conts.length; i++) {
+      if (i != indx) conts[i].show = false;
+    }
+    conts[indx].show = !conts[indx].show;
+    setContests(conts);
+  };
+
+  const renderContests = () => {
+    return contests.map((contest) => {
+      return (
+        <div key={contest._id}>
+          <div
+            className="profileContest"
+            onClick={() => handleShowDetails(contest)}
+          >
+            <p className="contestHeading">{contest.header}</p>
+            <p>{contest.contestType}</p>
+            <p>{dayjs(contest.date).format("YYYY/MM/DD")}</p>
+            <p>{contest.rank}</p>
+          </div>
+
+          {contest.show && (
+            <div className="row contestCard">
+              <div className="col-lg-4 contestCardPicDiv">
+                <div
+                  className="img imgLeft"
+                  onClick={() => setFile(contest.imgLink[0])}
+                >
+                  <img src={getImgUrl(contest.imgLink[0])} alt="" />
+                </div>
+                <div
+                  className="img imgRight"
+                  onClick={() => setFile(contest.imgLink[1])}
+                >
+                  <img src={getImgUrl(contest.imgLink[1])} alt="" />
+                </div>
+                <div
+                  className="img imgLeft"
+                  onClick={() => setFile(contest.imgLink[2])}
+                >
+                  <img src={getImgUrl(contest.imgLink[2])} alt="" />
+                </div>
+                <div
+                  className="img imgRight"
+                  onClick={() => setFile(contest.imgLink[3])}
+                >
+                  <img src={getImgUrl(contest.imgLink[3])} alt="" />
+                </div>
+              </div>
+              <div className="col-lg-1 divider">
+                <img src={divider} alt="" />
+              </div>
+              <div className="col-lg contestCardDesDiv">
+                <h1>{contest.header}</h1>
+                <h4>
+                  Contest Type: <span>{contest.contestType}</span>
+                </h4>
+                <h4>Participants:</h4>
+                <ul>
+                  <li>
+                    <Link
+                      onClick={() =>
+                        (window.location =
+                          "/profiles/" + contest.participant1.profileId)
+                      }
+                    >
+                      {contest.participant1.name}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={() =>
+                        (window.location =
+                          "/profiles/" + contest.participant2.profileId)
+                      }
+                    >
+                      {contest.participant2.name}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      onClick={() =>
+                        (window.location =
+                          "/profiles/" + contest.participant3.profileId)
+                      }
+                    >
+                      {contest.participant3.name}
+                    </Link>
+                  </li>
+                </ul>
+                <p>
+                  <span>Description : </span> {contest.description}
+                </p>
+                <p>
+                  <span>Date : </span>
+                  {dayjs(contest.date).format("YYYY/MM/DD")}
+                </p>
+                <h4>Rank: {contest.rank}</h4>
+                <a href={`//${contest.link}`} target="_blank">
+                  Standings
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    });
   };
 
   if (loading) return null;
-  // console.log(profileInfo);
+  console.log(profileInfo);
+  // console.log(contests);
   return (
     <div className="profileWrap">
       <div className="row picAndBioSection">
@@ -100,7 +231,7 @@ function Profiles(props) {
           <h3>{profileInfo.name}</h3>
           <h5>
             <span>ID: </span>
-            {/* {user.sid} ------------------------change user.sid to profileInfo.sid*/}
+            {profileInfo.sid}
           </h5>
           {ownProfile && (
             <button
@@ -124,6 +255,9 @@ function Profiles(props) {
             <span>LinkedIn :</span> {profileInfo.contacts.linkedinLink}
           </p>
           <div className="cfCards">
+            <div className="cfCardsHeadingWrap">
+              <h3>Codeforces Statistics</h3>
+            </div>
             <div className="cfCard">
               <span>CF Rank</span>
               {profileInfo.codeforcesId.rank}
@@ -140,11 +274,19 @@ function Profiles(props) {
               <span>CF Max Rating</span>
               {profileInfo.codeforcesId.maxRating}
             </div>
+            <div className="cfCard">
+              <span>CF Solved Problems</span>
+              {profileInfo.codeforcesId.solvedProblem}
+            </div>
+            <div className="cfCard">
+              <span>CF Contests</span>
+              {profileInfo.codeforcesId.totalContest}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="contestLinksSection">
+      <div className="linksSection">
         <h2>Online Judge Links</h2>
         <a
           href={`//${profileInfo.onlineJudgeLink.githubLink}`}
@@ -189,6 +331,19 @@ function Profiles(props) {
           />
         </a>
       </div>
+
+      <div className="profileContests">
+        <h2>Participated Contests</h2>
+        <div className="profileContestColumnName">
+          <p>Contest Name</p>
+          <p>Contest Type</p>
+          <p>Date</p>
+          <p>Rank</p>
+        </div>
+        {renderContests()}
+      </div>
+
+      <ImagePopUp file={file} setFile={setFile} />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../services/authService";
 import divider from "../assets/divider.png";
+import ImagePopUp from "./imagePopUp";
 import {
   deleteContest,
   getContests,
@@ -16,6 +17,7 @@ function ContestHistory(props) {
   const [contests, setContests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showRequests, setShowRequests] = useState(false);
+  const [file, setFile] = useState(null); //for image pop up
 
   const navigate = useNavigate();
 
@@ -105,16 +107,28 @@ function ContestHistory(props) {
               </button>
             )}
             <div className="col-lg-4 contestCardPicDiv">
-              <div className="img imgLeft">
+              <div
+                className="img imgLeft"
+                onClick={() => setFile(contest.imgLink[0])}
+              >
                 <img src={getImgUrl(contest.imgLink[0])} alt="" />
               </div>
-              <div className="img imgRight">
+              <div
+                className="img imgRight"
+                onClick={() => setFile(contest.imgLink[1])}
+              >
                 <img src={getImgUrl(contest.imgLink[1])} alt="" />
               </div>
-              <div className="img imgLeft">
+              <div
+                className="img imgLeft"
+                onClick={() => setFile(contest.imgLink[2])}
+              >
                 <img src={getImgUrl(contest.imgLink[2])} alt="" />
               </div>
-              <div className="img imgRight">
+              <div
+                className="img imgRight"
+                onClick={() => setFile(contest.imgLink[3])}
+              >
                 <img src={getImgUrl(contest.imgLink[3])} alt="" />
               </div>
             </div>
@@ -168,6 +182,7 @@ function ContestHistory(props) {
           </div>
         );
       })}
+      <ImagePopUp file={file} setFile={setFile} />
     </div>
   );
 }

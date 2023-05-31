@@ -9,6 +9,9 @@ function contestUrl(id) {
 export function getContests() {
   return http.get(apiEndPoint);
 }
+export function getContest(id) {
+  return http.get(contestUrl(id));
+}
 export function addContest(contest) {
   return http.post(apiEndPoint, contest);
 }
