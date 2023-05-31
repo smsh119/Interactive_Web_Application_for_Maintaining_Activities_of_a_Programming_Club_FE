@@ -249,10 +249,21 @@ function Profiles(props) {
           <p>{profileInfo.currentStatus}</p>
           <h4>Contacts</h4>
           <p>
-            <span>Phone :</span> {profileInfo.contacts.phone} <br />
-            <span>Email :</span> {profileInfo.contacts.email} <br />
-            <span>Facebook :</span> {profileInfo.contacts.fbLink} <br />
-            <span>LinkedIn :</span> {profileInfo.contacts.linkedinLink}
+            <span>Phone :</span> +880{profileInfo.contacts.phone} <br />
+            <span>Email :</span>{" "}
+            <a href={`mailto:${profileInfo.contacts.email}`}>
+              {profileInfo.contacts.email}
+            </a>{" "}
+            <br />
+            <span>Facebook :</span>{" "}
+            <a href={`//${profileInfo.contacts.fbLink}`} target="_blank">
+              {`${profileInfo.contacts.fbLink}`}
+            </a>{" "}
+            <br />
+            <span>LinkedIn :</span>{" "}
+            <a href={`//${profileInfo.contacts.linkedinLink}`} target="_blank">
+              {`${profileInfo.contacts.linkedinLink}`}
+            </a>{" "}
           </p>
           <div className="cfCards">
             <div className="cfCardsHeadingWrap">
@@ -332,16 +343,18 @@ function Profiles(props) {
         </a>
       </div>
 
-      <div className="profileContests">
-        <h2>Participated Contests</h2>
-        <div className="profileContestColumnName">
-          <p>Contest Name</p>
-          <p>Contest Type</p>
-          <p>Date</p>
-          <p>Rank</p>
+      {contests.length > 0 && (
+        <div className="profileContests">
+          <h2>Participated Contests</h2>
+          <div className="profileContestColumnName">
+            <p>Contest Name</p>
+            <p>Contest Type</p>
+            <p>Date</p>
+            <p>Rank</p>
+          </div>
+          {renderContests()}
         </div>
-        {renderContests()}
-      </div>
+      )}
 
       <ImagePopUp file={file} setFile={setFile} />
     </div>

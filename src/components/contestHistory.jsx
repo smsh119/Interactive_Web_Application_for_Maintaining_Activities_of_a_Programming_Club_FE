@@ -97,15 +97,6 @@ function ContestHistory(props) {
           return;
         return (
           <div key={contest._id} className="row contestCard">
-            {isAdmin && !contest.isApproved && (
-              <button
-                className="btn btn-lg custom-btn"
-                style={{ margin: "0px 0px 10px 0px" }}
-                onClick={() => handleApprove(contest)}
-              >
-                Approve Post
-              </button>
-            )}
             <div className="col-lg-4 contestCardPicDiv">
               <div
                 className="img imgLeft"
@@ -170,6 +161,15 @@ function ContestHistory(props) {
                 Standings
               </a>
               <br />
+              {isAdmin && !contest.isApproved && (
+                <button
+                  className="btn btn-lg custom-btn"
+                  style={{ margin: "0px 0px 10px 0px" }}
+                  onClick={() => handleApprove(contest)}
+                >
+                  Approve Post
+                </button>
+              )}
               {isAdmin && isSuperAdmin && (
                 <button
                   className="btn btn-danger btn-lg"

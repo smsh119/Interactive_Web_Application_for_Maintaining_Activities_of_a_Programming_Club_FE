@@ -124,9 +124,9 @@ class ProfileFormC extends Form {
     try {
       await saveProfile(obj);
       const navigate = this.props.navigate;
-      setTimeout(() => {
-        navigate("/profiles/" + auth.getCurrentUser().profileId);
-      }, 2000);
+      // setTimeout(() => {
+      navigate("/profiles/" + auth.getCurrentUser().profileId);
+      // }, 2000);
     } catch (error) {
       toast.error("Codeforces handle is invalid!");
       console.log(error.response.data);

@@ -17,7 +17,7 @@ function About(props) {
         setLoading(false);
         // console.log(info);
       } catch (error) {
-        console.log(error.response.data);
+        // console.log(error.response.data);
         toast.error("Info not found!");
       }
     };

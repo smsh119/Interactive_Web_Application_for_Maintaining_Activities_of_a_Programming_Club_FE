@@ -24,7 +24,7 @@ class SignInFormC extends Form {
 
       if (location.state) {
         const prevUrl = location.state.prevUrl;
-        console.log(prevUrl);
+        // console.log(prevUrl);
         window.location = prevUrl;
       } else window.location = "/";
     } catch (ex) {
