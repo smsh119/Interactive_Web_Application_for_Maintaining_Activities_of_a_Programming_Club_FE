@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getInfo } from "../services/aboutService";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
+import { getCurrentUser } from "../services/authService";
 
 function About(props) {
   const [info, setInfo] = useState();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -77,12 +80,14 @@ function About(props) {
       </p>
       <div>
         <h2>Executive Committee</h2>
-        <button
-          className="btn btn-lg custom-btn"
-          onClick={() => navigate("/about/edit")}
-        >
-          Edit
-        </button>
+        {isAdmin && (
+          <button
+            className="btn btn-lg custom-btn"
+            onClick={() => navigate("/about/edit")}
+          >
+            Edit
+          </button>
+        )}
       </div>
       <div>
         <h4>President:</h4>
@@ -118,12 +123,14 @@ function About(props) {
       </div>
       <div>
         <h2>Student Executive Member</h2>
-        <button
-          className="btn btn-lg custom-btn"
-          onClick={() => navigate("/about/edit")}
-        >
-          Edit
-        </button>
+        {isAdmin && (
+          <button
+            className="btn btn-lg custom-btn"
+            onClick={() => navigate("/about/edit")}
+          >
+            Edit
+          </button>
+        )}
       </div>
       <div>
         <p>

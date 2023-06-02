@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { getNotices, deleteNotice } from "../services/noticeService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import { getCurrentUser } from "../services/authService";
 
 function Notices(props) {
   const [notices, setNotices] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
 
   useEffect(() => {
     async function fetchData() {
@@ -51,12 +53,14 @@ function Notices(props) {
   return (
     <>
       <h1>Notices</h1>
-      <button
-        className="btn btn-lg btn-info custom-btn"
-        onClick={() => navigate("/notices/noticeForm")}
-      >
-        Add Notice
-      </button>
+      {isAdmin && (
+        <button
+          className="btn btn-lg btn-info custom-btn"
+          onClick={() => navigate("/notices/noticeForm")}
+        >
+          Add Notice
+        </button>
+      )}
       {notices.map((notice) => {
         return (
           <div key={notice._id}>
@@ -75,13 +79,15 @@ function Notices(props) {
                   >
                     Details
                   </button>
-                  <button
-                    className="btn btn-lg btn-danger"
-                    style={{ justifySelf: "flex-end" }}
-                    onClick={() => handleDelete(notice)}
-                  >
-                    Delete
-                  </button>
+                  {isAdmin && (
+                    <button
+                      className="btn btn-lg btn-danger"
+                      style={{ justifySelf: "flex-end" }}
+                      onClick={() => handleDelete(notice)}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
               {notice.show && (

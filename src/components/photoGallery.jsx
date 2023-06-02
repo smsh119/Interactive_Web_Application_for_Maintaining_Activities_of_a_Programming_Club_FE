@@ -3,6 +3,7 @@ import PhotoGalleryForm from "./photoGalleryForm";
 import { getPhotos } from "../services/galleryService";
 import getImgUrl from "../services/imgService";
 import ImagePopUp from "./imagePopUp";
+import { getCurrentUser } from "../services/authService";
 
 function PhotoGallery(props) {
   const [media, setMedia] = useState(null);
@@ -10,7 +11,7 @@ function PhotoGallery(props) {
   const [showDes, setShowDes] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
   useEffect(() => {
     async function fetchData() {
       const { data: media } = await getPhotos();
@@ -29,9 +30,11 @@ function PhotoGallery(props) {
   return (
     <div className="galleryContainer">
       <h1>Photo Gallery</h1>
-      <button className="btn btn-lg custom-btn" onClick={handleShowForm}>
-        Add Photo
-      </button>
+      {isAdmin && (
+        <button className="btn btn-lg custom-btn" onClick={handleShowForm}>
+          Add Photo
+        </button>
+      )}
       {showForm && (
         <div className="galleryFrom">
           <PhotoGalleryForm onClose={handleShowForm} />
