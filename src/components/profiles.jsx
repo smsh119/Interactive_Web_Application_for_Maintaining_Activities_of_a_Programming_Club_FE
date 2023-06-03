@@ -5,7 +5,7 @@ import { getProfile, addProfilePicture } from "../services/profileService";
 import { getContest } from "../services/contestService";
 import auth from "../services/authService";
 import divider from "../assets/divider.png";
-
+import getExternalUrl from "../utils/externalLinks";
 import { InputText } from "primereact/inputtext";
 import getImgUrl from "../services/imgService";
 import ProfileUpdateUser from "./profileUpdateUser";
@@ -256,14 +256,20 @@ function Profiles(props) {
             </a>{" "}
             <br />
             <span>Facebook :</span>{" "}
-            <a href={`//${profileInfo.contacts.fbLink}`} target="_blank">
+            <Link
+              to={`//${getExternalUrl(profileInfo.contacts.fbLink)}`}
+              target="_blank"
+            >
               {`${profileInfo.contacts.fbLink}`}
-            </a>{" "}
+            </Link>{" "}
             <br />
             <span>LinkedIn :</span>{" "}
-            <a href={`//${profileInfo.contacts.linkedinLink}`} target="_blank">
+            <Link
+              to={`//${getExternalUrl(profileInfo.contacts.linkedinLink)}`}
+              target="_blank"
+            >
               {`${profileInfo.contacts.linkedinLink}`}
-            </a>{" "}
+            </Link>{" "}
           </p>
           <div className="cfCards">
             <div className="cfCardsHeadingWrap">
@@ -300,7 +306,7 @@ function Profiles(props) {
       <div className="linksSection">
         <h2>Online Judge Links</h2>
         <a
-          href={`//${profileInfo.onlineJudgeLink.githubLink}`}
+          href={`//${getExternalUrl(profileInfo.onlineJudgeLink.githubLink)}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -310,7 +316,9 @@ function Profiles(props) {
           />
         </a>
         <a
-          href={`//${profileInfo.onlineJudgeLink.codeforcesLink}`}
+          href={`//${getExternalUrl(
+            profileInfo.onlineJudgeLink.codeforcesLink
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -322,7 +330,7 @@ function Profiles(props) {
           />
         </a>
         <a
-          href={`//${profileInfo.onlineJudgeLink.leetcodeLink}`}
+          href={`//${getExternalUrl(profileInfo.onlineJudgeLink.leetcodeLink)}`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -332,7 +340,9 @@ function Profiles(props) {
           />
         </a>
         <a
-          href={`//${profileInfo.onlineJudgeLink.stopstalkLink}`}
+          href={`//${getExternalUrl(
+            profileInfo.onlineJudgeLink.stopstalkLink
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
         >
