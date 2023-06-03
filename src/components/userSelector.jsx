@@ -2,35 +2,35 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import http from "../services/httpService";
 
-function UserSelector({ onChange, error }) {
-  const [users, setUsers] = useState(null);
-  const [options, setOptions] = useState(null);
-  const [loading, setLoading] = useState(true);
+function UserSelector({ onChange, error, options, users }) {
+  // const [users, setUsers] = useState(null);
+  // const [options, setOptions] = useState(null);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { data } = await http.get("/programmers/list");
-        setUsers(data);
-        mapOptions(data);
-        setLoading(false);
-      } catch (e) {
-        console.log(e.response.status);
-      }
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const { data } = await http.get("/programmers/list");
+  //       setUsers(data);
+  //       mapOptions(data);
+  //       setLoading(false);
+  //     } catch (e) {
+  //       console.log(e.response.status);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
-  const mapOptions = (data) => {
-    let optns = [];
-    for (let i = 0; i < data.length; i++) {
-      optns.push({
-        label: data[i].profileId.name + " | " + data[i].sid,
-        value: data[i].profileId._id,
-      });
-    }
-    setOptions(optns);
-  };
+  // const mapOptions = (data) => {
+  //   let optns = [];
+  //   for (let i = 0; i < data.length; i++) {
+  //     optns.push({
+  //       label: data[i].profileId.name + " | " + data[i].sid,
+  //       value: data[i].profileId._id,
+  //     });
+  //   }
+  //   setOptions(optns);
+  // };
 
   const handleChange = (e) => {
     const indx = options.indexOf(e);
@@ -43,7 +43,7 @@ function UserSelector({ onChange, error }) {
     onChange(obj);
   };
 
-  if (loading) return null;
+  // if (loading) return null;
   //   console.log(users);
   return (
     <div>

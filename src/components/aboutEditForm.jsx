@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import { getInfo, saveInfo } from "../services/aboutService";
+import http from "../services/httpService";
 
 class AboutEditFormC extends Form {
   state = {
@@ -39,6 +40,8 @@ class AboutEditFormC extends Form {
     },
     errors: {},
     users: {},
+    programmersList: [],
+    options: [],
   };
 
   schema = {
@@ -103,7 +106,25 @@ class AboutEditFormC extends Form {
 
   async componentDidMount() {
     await this.populateInfo();
+    try {
+      const { data } = await http.get("/programmers/list");
+      this.setState({ programmersList: data });
+      this.mapOptions(data);
+    } catch (e) {
+      console.log(e);
+    }
   }
+
+  mapOptions = (data) => {
+    let optns = [];
+    for (let i = 0; i < data.length; i++) {
+      optns.push({
+        label: data[i].profileId.name + " | " + data[i].sid,
+        value: data[i].profileId._id,
+      });
+    }
+    this.setState({ options: optns });
+  };
 
   mapToViewModel(response) {
     const obj = {
@@ -237,7 +258,7 @@ class AboutEditFormC extends Form {
       navigate("/about");
     } catch (error) {
       toast.error("Error occured!");
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 
@@ -261,36 +282,65 @@ class AboutEditFormC extends Form {
           {this.renderInput("treasurerDesignation", "Designation")}
           <h2>Student Committee:</h2>
 
-          {this.renderUserSelector("generalSecretary", "General Secretary")}
+          {this.renderUserSelector(
+            "generalSecretary",
+            "General Secretary",
+            this.state.options,
+            this.state.programmersList
+          )}
           {this.renderUserSelector(
             "assistantGeneralSecretary",
-            "Assistant General Secretary"
+            "Assistant General Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
-          {this.renderUserSelector("officeSecretary", "Office Secretary")}
+          {this.renderUserSelector(
+            "officeSecretary",
+            "Office Secretary",
+            this.state.options,
+            this.state.programmersList
+          )}
           {this.renderUserSelector(
             "assistantOfficeSecretary",
-            "Assistant Office Secretary"
+            "Assistant Office Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
-          {this.renderUserSelector("financeSecretary", "Finance Secretary")}
+          {this.renderUserSelector(
+            "financeSecretary",
+            "Finance Secretary",
+            this.state.options,
+            this.state.programmersList
+          )}
           {this.renderUserSelector(
             "assistantFinanceSecretary",
-            "Assistant Finance Secretary"
+            "Assistant Finance Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
           {this.renderUserSelector(
             "publicationSecretary",
-            "Publication Secretary"
+            "Publication Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
           {this.renderUserSelector(
             "assistantPublicationSecretary",
-            "Assistant Publication Secretary"
+            "Assistant Publication Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
           {this.renderUserSelector(
             "socialWelfareSecretary",
-            "Social Welfare Secretary"
+            "Social Welfare Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
           {this.renderUserSelector(
             "assistantSocialWelfareSecretary",
-            "Assistant Social Welfare Secretary"
+            "Assistant Social Welfare Secretary",
+            this.state.options,
+            this.state.programmersList
           )}
           {this.renderButton("Save")}
         </form>

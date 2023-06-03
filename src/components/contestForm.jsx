@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 import { addContest } from "../services/contestService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import http from "../services/httpService";
 
 class ContestFormC extends Form {
   state = {
@@ -28,6 +29,8 @@ class ContestFormC extends Form {
       contestType: "",
     },
     errors: {},
+    programmersList: [],
+    options: [],
   };
 
   schema = {
@@ -49,6 +52,27 @@ class ContestFormC extends Form {
     img4: Joi.object().required(),
     isApproved: Joi.boolean().required(),
     contestType: Joi.string().required().label("Contest Type"),
+  };
+
+  async componentDidMount() {
+    try {
+      const { data } = await http.get("/programmers/list");
+      this.setState({ programmersList: data });
+      this.mapOptions(data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  mapOptions = (data) => {
+    let optns = [];
+    for (let i = 0; i < data.length; i++) {
+      optns.push({
+        label: data[i].profileId.name + " | " + data[i].sid,
+        value: data[i].profileId._id,
+      });
+    }
+    this.setState({ options: optns });
   };
 
   mapToRequestModel = (data) => {
@@ -109,9 +133,24 @@ class ContestFormC extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("header", "Title")}
           {this.renderDate("date", "Contest Date", "date")}
-          {this.renderUserSelector("participant1", "Particiant 1")}
-          {this.renderUserSelector("participant2", "Particiant 2")}
-          {this.renderUserSelector("participant3", "Particiant 3")}
+          {this.renderUserSelector(
+            "participant1",
+            "Particiant 1",
+            this.state.options,
+            this.state.programmersList
+          )}
+          {this.renderUserSelector(
+            "participant2",
+            "Particiant 2",
+            this.state.options,
+            this.state.programmersList
+          )}
+          {this.renderUserSelector(
+            "participant3",
+            "Particiant 3",
+            this.state.options,
+            this.state.programmersList
+          )}
           {this.renderInput("description", "Descripition")}
           {this.renderInput("rank", "Rank", "number")}
           {this.renderInput("link", "Standing Link")}

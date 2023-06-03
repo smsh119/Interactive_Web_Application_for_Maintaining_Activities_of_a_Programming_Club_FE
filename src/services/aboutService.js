@@ -14,7 +14,7 @@ export function saveInfo(info) {
   if (info._id) {
     const body = { ...info };
     delete body._id;
-    return http.put(urlWithId(_id), body);
+    return http.put(urlWithId(info._id), body);
   }
 
   return http.post(apiEndPoint, info);

@@ -157,13 +157,15 @@ class Form extends Component {
     );
   }
 
-  renderUserSelector(name, label) {
+  renderUserSelector(name, label, options, users) {
     return (
       <div>
         <p>{label}</p>
         <UserSelector
           onChange={(e) => this.handleChangeForUserSelector(e, name)}
           error={this.state.errors[name]}
+          options={options}
+          users={users}
         />
       </div>
     );
