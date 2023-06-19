@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/navbar";
 import ProgrammersList from "./components/programmersList";
@@ -21,6 +21,9 @@ import auth from "./services/authService";
 import ContestForm from "./components/contestForm";
 import ProfileForm from "./components/profileForm";
 import AboutEditForm from "./components/aboutEditForm";
+import Resources from "./components/resources";
+import ResourcePosts from "./components/resourcePosts";
+import ResourceFiles from "./components/resourceFiles";
 
 function App() {
   return (
@@ -38,6 +41,11 @@ function App() {
           <Route path="/signIn" element={<SignInForm />} />
           <Route path="/signUp" element={<SignUpForm />} />
           <Route path="/notices" element={<Notices />} />
+          <Route path="/resources" element={<Resources />}>
+            <Route path="posts" element={<ResourcePosts />} />
+            <Route path="files" element={<ResourceFiles />} />
+            <Route path="" element={<Navigate to="posts" />} />
+          </Route>
           <Route path="/notices/noticeForm" element={<NoticeForm />} />
           <Route path="/profiles/:id" element={<Profiles />} />
           <Route path="/profiles/profileForm" element={<ProfileForm />} />

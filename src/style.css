@@ -864,3 +864,37 @@ h2 {
   color: #fff;
   user-select: none;
 }
+
+/* ---------------Resources page----------------- */
+
+.resourcesWrap {
+}
+.resourcesWrap h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.resourcesWrap ul {
+  border-bottom: 3px solid #05445e;
+}
+.resourcesWrap ul li {
+  border: 3px solid #05445e;
+  border-bottom: 0;
+  border-radius: 0.4em 0.4em 0em 0em;
+}
+.resourcesWrap .nav-link.active {
+  background-color: #189ab4;
+  color: #d4f1f4 !important;
+}
+.resourcesWrap .postDiv {
+  border: 2px solid #189ab4;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.resourcesWrap .fileDiv {
+  margin-top: 10px;
+  border: 2px solid #189ab4;
+  padding: 0.5em 0.5em 0.5em 1em;
+  border-radius: 10px;
+}
