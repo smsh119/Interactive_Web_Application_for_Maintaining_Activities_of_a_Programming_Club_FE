@@ -1,12 +1,13 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import ICEPC_LOGO from "/ICEPC_LOGO.png";
 
 function Navbar({ user }) {
   return (
     <nav className="navbar fixed-top navbar-expand-lg clr4-bg">
       <div className="container-fluid">
         <Link className="navbar-brand clr1 fontLilitaOne" to="/">
-          ICE_PC
+          <img src={ICEPC_LOGO} width="40rem" alt="" />
         </Link>
         <button
           className="navbar-toggler"
@@ -43,6 +44,16 @@ function Navbar({ user }) {
                 to="/photoGallery"
               >
                 Photo Gallery
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link fontLilitaOne clr2" to="/notices">
+                Notices
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link fontLilitaOne clr2" to="/resources">
+                Resources
               </NavLink>
             </li>
             <li className="nav-item">

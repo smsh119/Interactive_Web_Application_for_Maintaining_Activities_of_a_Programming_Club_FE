@@ -36,7 +36,6 @@ function Profiles(props) {
       try {
         const { data: profile } = await getProfile(userId);
         setProfileInfo(profile);
-        // console.log(profile.contests[0]);
         const conts = [];
         for (let i = 0; i < profile.contests.length; i++) {
           const { data } = await getContest(profile.contests[i]);
@@ -44,7 +43,6 @@ function Profiles(props) {
         }
         conts.reverse();
         setContests(conts);
-        // console.log(conts);
         setLoading(false);
       } catch (e) {
         console.log(e.response);
@@ -79,7 +77,6 @@ function Profiles(props) {
   const handleImg = ({ currentTarget: input }) => {
     const img = input.files[0];
     setProfilePicture(img);
-    // console.log(profilePicture);
   };
 
   const handleShowDetails = (contest) => {
@@ -184,7 +181,7 @@ function Profiles(props) {
                   {dayjs(contest.date).format("YYYY/MM/DD")}
                 </p>
                 <h4>Rank: {contest.rank}</h4>
-                <a href={`//${contest.link}`} target="_blank">
+                <a href={`//${getExternalUrl(contest.link)}`} target="_blank">
                   Standings
                 </a>
               </div>
@@ -196,8 +193,7 @@ function Profiles(props) {
   };
 
   if (loading) return null;
-  console.log(profileInfo);
-  // console.log(contests);
+
   return (
     <div className="profileWrap">
       <div className="row picAndBioSection">
@@ -304,7 +300,7 @@ function Profiles(props) {
       </div>
 
       <div className="linksSection">
-        <h2>Online Judge Links</h2>
+        <h2>Online Profile Links</h2>
         <a
           href={`//${getExternalUrl(profileInfo.onlineJudgeLink.githubLink)}`}
           target="_blank"

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { paginate } from "../utils/paginate";
-import Pagination from "./common/pagination";
 import _ from "lodash";
 import SearchBox from "./searchBox";
 import { toast } from "react-toastify";
@@ -10,8 +8,6 @@ import http from "../services/httpService";
 class ProgrammersList extends Component {
   state = {
     programmers: [],
-    currentPage: 1,
-    pageSize: 2,
     searchQuery: "",
     sortColumn: { path: "name", order: "asc" },
   };
@@ -44,12 +40,8 @@ class ProgrammersList extends Component {
     }
   }
 
-  handlePageChange = (page) => {
-    this.setState({ currentPage: page });
-  };
-
   handleSearch = (query) => {
-    this.setState({ searchQuery: query, currentPage: 1 });
+    this.setState({ searchQuery: query });
   };
 
   handleSort = (sortColumn) => {
@@ -57,13 +49,7 @@ class ProgrammersList extends Component {
   };
 
   getPagedData = () => {
-    const {
-      pageSize,
-      currentPage,
-      searchQuery,
-      programmers: allProgrammers,
-      sortColumn,
-    } = this.state;
+    const { searchQuery, programmers: allProgrammers, sortColumn } = this.state;
 
     let filtered = allProgrammers;
     if (searchQuery)
@@ -72,16 +58,13 @@ class ProgrammersList extends Component {
           m.name.toLowerCase().startsWith(searchQuery.toLowerCase()) ||
           m.sid.startsWith(searchQuery)
       );
-    // console.log(filtered);
     const sorted = _.orderBy(filtered, sortColumn.path, sortColumn.order);
-    // const programmers = paginate(sorted, currentPage, pageSize);  //for pagination
     return { totalCount: filtered.length, data: sorted };
   };
 
   render() {
-    const { length: count } = this.state.programmers;
-    const { pageSize, currentPage, sortColumn } = this.state;
-    const { totalCount, data: programmers } = this.getPagedData();
+    const { sortColumn } = this.state;
+    const { data: programmers } = this.getPagedData();
 
     return (
       <div className="programmersListDiv">
@@ -90,18 +73,11 @@ class ProgrammersList extends Component {
           onChange={this.handleSearch}
         />
 
-        {/* <p>Showing {totalCount} programmers in the datebase.</p> */}
         <ProgrammersTable
           programmers={programmers}
           sortColumn={sortColumn}
           onSort={this.handleSort}
         />
-        {/* <Pagination
-          itemsCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
-        /> */}
       </div>
     );
   }

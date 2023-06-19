@@ -25,8 +25,3 @@ class TestCC extends Component {
 }
 
 export default TestCC;
-
-//     .get(`https://codeforces.com/api/user.info?${input.value}`)
-//     .then((res) => {
-//       if (res.status !== "OK") errors[input.name] = "CF handle not valid !";
-//     });

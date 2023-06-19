@@ -3,8 +3,6 @@ import Form from "./common/form";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import { addPhoto } from "../services/galleryService";
-import dayjs from "dayjs";
-import { toast } from "react-toastify";
 
 class PhotoGalleryFormC extends Form {
   state = {
@@ -35,10 +33,6 @@ class PhotoGalleryFormC extends Form {
 
   doSubmit = async () => {
     const data = this.mapToViewModel(this.state.data);
-
-    // for (var pair of data.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
 
     try {
       await addPhoto(data);

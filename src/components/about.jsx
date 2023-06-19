@@ -8,19 +8,16 @@ function About(props) {
   const [info, setInfo] = useState();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
+  const isSuperAdmin = getCurrentUser() ? getCurrentUser().isSuperAdmin : false;
 
   useEffect(() => {
     const fetch = async () => {
       try {
         const { data } = await getInfo();
-        // console.log(data[data.length - 1]);
         if (data.length === 0) setInfo(null);
         else setInfo(data[data.length - 1]);
         setLoading(false);
-        // console.log(info);
       } catch (error) {
-        // console.log(error.response.data);
         toast.error("Info not found!");
       }
     };
@@ -80,7 +77,7 @@ function About(props) {
       </p>
       <div>
         <h2>Executive Committee</h2>
-        {isAdmin && (
+        {isSuperAdmin && (
           <button
             className="btn btn-lg custom-btn"
             onClick={() => navigate("/about/edit")}
@@ -123,7 +120,7 @@ function About(props) {
       </div>
       <div>
         <h2>Student Executive Member</h2>
-        {isAdmin && (
+        {isSuperAdmin && (
           <button
             className="btn btn-lg custom-btn"
             onClick={() => navigate("/about/edit")}
@@ -154,7 +151,7 @@ function About(props) {
                 info.studentCommittee.assistantGeneralSecretary.profileId
               }
             >
-              {info.studentCommittee.assistantGeneralSecretar}y.name
+              {info.studentCommittee.assistantGeneralSecretary.name}
             </Link>
           )}
         </p>
@@ -204,7 +201,7 @@ function About(props) {
                 info.studentCommittee.assistantFinanceSecretary.profileId
               }
             >
-              {info.studentCommittee.assistantFinanceSecretar}y.name
+              {info.studentCommittee.assistantFinanceSecretary.name}
             </Link>
           )}
         </p>
@@ -230,7 +227,7 @@ function About(props) {
                 info.studentCommittee.assistantPublicationSecretary.profileId
               }
             >
-              {info.studentCommittee.assistantPublicationSe}cretary.name
+              {info.studentCommittee.assistantPublicationSecretary.name}
             </Link>
           )}
         </p>

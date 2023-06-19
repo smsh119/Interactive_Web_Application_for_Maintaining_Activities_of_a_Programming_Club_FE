@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import getImgUrl from "../services/imgService";
+import getExternalUrl from "../utils/externalLinks";
 
 function ContestHistory(props) {
   const [contests, setContests] = useState([]);
@@ -79,12 +80,14 @@ function ContestHistory(props) {
           >
             Add Contest
           </button>
-          <button
-            className="btn btn-lg custom-btn contestHistoryReqBtn"
-            onClick={() => setShowRequests(!showRequests)}
-          >
-            {showRequests ? "Approved Contests" : "Requests"}
-          </button>
+          {(isAdmin || isSuperAdmin) && (
+            <button
+              className="btn btn-lg custom-btn contestHistoryReqBtn"
+              onClick={() => setShowRequests(!showRequests)}
+            >
+              {showRequests ? "Approved Contests" : "Requests"}
+            </button>
+          )}
         </div>
       )}
 
@@ -157,7 +160,7 @@ function ContestHistory(props) {
                 {dayjs(contest.date).format("YYYY/MM/DD")}
               </p>
               <h4>Rank: {contest.rank}</h4>
-              <a href={`//${contest.link}`} target="_blank">
+              <a href={`//${getExternalUrl(contest.link)}`} target="_blank">
                 Standings
               </a>
               <br />

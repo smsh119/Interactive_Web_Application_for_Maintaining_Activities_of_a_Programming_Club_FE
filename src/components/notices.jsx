@@ -5,6 +5,7 @@ import { getNotices, deleteNotice } from "../services/noticeService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../services/authService";
+import getExternalUrl from "../utils/externalLinks";
 
 function Notices(props) {
   const [notices, setNotices] = useState([]);
@@ -49,7 +50,6 @@ function Notices(props) {
   };
 
   if (loading) return; // to fix the async works in use effect
-  // console.log(notices[0]._id);
   return (
     <>
       <h1>Notices</h1>
@@ -106,12 +106,17 @@ function Notices(props) {
                     <span>Description :</span> {notice.description}
                   </p>
                   <br />
-                  <p>
-                    <span>Link :</span>
-                    <a href={`//${notice.link}`} target="_blank">
-                      {notice.link}
-                    </a>
-                  </p>
+                  {notice.link && notice.link.replace(/ /g, "").length > 0 && (
+                    <p>
+                      <span>Link :</span>
+                      <a
+                        href={`//${getExternalUrl(notice.link)}`}
+                        target="_blank"
+                      >
+                        {notice.link}
+                      </a>
+                    </p>
+                  )}
                   <br />
                   <img src="" alt="" />
                 </div>

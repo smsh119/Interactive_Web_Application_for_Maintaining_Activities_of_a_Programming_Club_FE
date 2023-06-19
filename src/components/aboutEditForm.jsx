@@ -139,23 +139,6 @@ class AboutEditFormC extends Form {
       vicePresident2Designation: response.committee.vicePresident2.designation,
       treasurerDesignation: response.committee.treasurer.designation,
 
-      // generalSecretary: response.studentCommittee.generalSecretary.name,
-      // assistantGeneralSecretary:
-      //   response.studentCommittee.assistantGeneralSecretary.name,
-      // officeSecretary: response.studentCommittee.officeSecretary.name,
-      // assistantOfficeSecretary:
-      //   response.studentCommittee.assistantOfficeSecretary.name,
-      // financeSecretary: response.studentCommittee.financeSecretary.name,
-      // assistantFinanceSecretary:
-      //   response.studentCommittee.assistantFinanceSecretary.name,
-      // publicationSecretary: response.studentCommittee.publicationSecretary.name,
-      // assistantPublicationSecretary:
-      //   response.studentCommittee.assistantPublicationSecretary.name,
-      // socialWelfareSecretary:
-      //   response.studentCommittee.socialWelfareSecretary.name,
-      // assistantSocialWelfareSecretary:
-      //   response.studentCommittee.assistantSocialWelfareSecretary.name,
-
       generalSecretaryProfileId:
         response.studentCommittee.generalSecretary.profileId,
       assistantGeneralSecretaryProfileId:
@@ -177,7 +160,6 @@ class AboutEditFormC extends Form {
       assistantSocialWelfareSecretaryProfileId:
         response.studentCommittee.assistantSocialWelfareSecretary.profileId,
     };
-    // console.log(obj);
     return obj;
   }
 

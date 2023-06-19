@@ -50,10 +50,8 @@ class ProfileFormC extends Form {
   async populateInfo() {
     try {
       const { data: user } = await getUser();
-      // console.log(user);
       if (!user.isUpdated) return;
       const { data: response } = await getProfile(user.profileId);
-      //   console.log(response);
       this.setState({ data: this.mapToViewModel(response) });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
@@ -116,17 +114,12 @@ class ProfileFormC extends Form {
   }
 
   doSubmit = async () => {
-    // console.log(this.state.data);
     const { data } = this.state;
     const obj = this.mapToRequestModel(data);
-
-    // console.log(obj);
     try {
       await saveProfile(obj);
       const navigate = this.props.navigate;
-      // setTimeout(() => {
       navigate("/profiles/" + auth.getCurrentUser().profileId);
-      // }, 2000);
     } catch (error) {
       toast.error("Codeforces handle is invalid!");
       console.log(error.response.data);

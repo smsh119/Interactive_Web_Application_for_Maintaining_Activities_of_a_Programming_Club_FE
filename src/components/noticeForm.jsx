@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
 import { addNotice } from "../services/noticeService";
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 
 class NoticeFormC extends Form {
   state = {
@@ -34,12 +35,15 @@ class NoticeFormC extends Form {
     const dd = dayjs(d).toISOString();
     const dd2 = dayjs(d2).toISOString();
     this.setState({ date: dd, programDate: dd2 });
-    // console.log(this.state.data.date, this.state.data.programDate);
-    //work remaining;
 
-    await addNotice(this.state.data);
-    const navigate = this.props.navigate;
-    navigate("/notices");
+    try {
+      await addNotice(this.state.data);
+      const navigate = this.props.navigate;
+      navigate("/notices");
+    } catch (error) {
+      console.log(error.response.data);
+      toast.error(error.response.data);
+    }
   };
 
   render() {
