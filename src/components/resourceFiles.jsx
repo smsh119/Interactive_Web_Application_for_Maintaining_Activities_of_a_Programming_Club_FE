@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import ResourceFilesForm from "./resourceFilesForm";
+import { getCurrentUser } from "../services/authService";
 
 function ResourceFiles(props) {
+  const [showForm, setShowForm] = useState(false);
+  const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
+
+  const handleShowForm = () => {
+    setShowForm(!showForm);
+  };
   return (
     <div>
-      <button className="btn btn-lg custom-btn mt-2">Add File</button>
+      {isAdmin && (
+        <button className="btn btn-lg custom-btn mt-2" onClick={handleShowForm}>
+          Add File
+        </button>
+      )}
+      {showForm && (
+        <div className="resourceForm">
+          <ResourceFilesForm onClose={handleShowForm} />
+        </div>
+      )}
       <div className="fileDiv">
         <div className="row">
           <div className="col-md-10">

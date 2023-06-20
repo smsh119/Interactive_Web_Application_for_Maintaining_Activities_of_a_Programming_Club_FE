@@ -5,6 +5,7 @@ import Select from "./select";
 import dayjs from "dayjs";
 import http from "../../services/httpService";
 import UserSelector from "../userSelector";
+import Textarea from "./textarea";
 class Form extends Component {
   state = {
     data: {},
@@ -99,6 +100,22 @@ class Form extends Component {
         error={errors[name]}
         onChange={this.handleChange}
         placeholder={placeholder}
+      />
+    );
+  }
+
+  renderTextarea(name, label, type = "text", placeholder = "", rows = 5) {
+    const { data, errors } = this.state;
+    return (
+      <Textarea
+        type={type}
+        name={name}
+        label={label}
+        value={data[name]}
+        error={errors[name]}
+        onChange={this.handleChange}
+        placeholder={placeholder}
+        rows={rows}
       />
     );
   }
