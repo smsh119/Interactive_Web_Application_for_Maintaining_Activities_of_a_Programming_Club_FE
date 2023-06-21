@@ -23,30 +23,35 @@ function ResourcePosts(props) {
         </div>
       )}
       <div className="postDiv">
-        <h2>post 1</h2>
+        <h2>Number theory</h2>
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem modi ratione rem ut eveniet distinctio, ab deserunt
-          accusamus quos praesentium repellat! Velit accusantium esse quae nobis
-          debitis itaque eos id.
+          Number theory is the study of the integers (e.g. whole numbers) and
+          related objects. Topics studied by number theorists include the
+          problem of determining the distribution of prime numbers within the
+          integers and the structure and number of solutions of systems of
+          polynomial equations with integer coefficients.
         </div>
       </div>
       <div className="postDiv">
-        <h2>post 1</h2>
+        <h2>Graph Theory</h2>
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem modi ratione rem ut eveniet distinctio, ab deserunt
-          accusamus quos praesentium repellat! Velit accusantium esse quae nobis
-          debitis itaque eos id.
+          In mathematics, graph theory is the study of graphs, which are
+          mathematical structures used to model pairwise relations between
+          objects. A graph in this context is made up of vertices (also called
+          nodes or points) which are connected by edges (also called links or
+          lines). A distinction is made between undirected graphs, where edges
+          link two vertices symmetrically, and directed graphs, where edges link
+          two vertices asymmetrically. Graphs are one of the principal objects
+          of study in discrete mathematics.
         </div>
       </div>
       <div className="postDiv">
-        <h2>post 1</h2>
+        <h2>Combinatorics</h2>
         <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Exercitationem modi ratione rem ut eveniet distinctio, ab deserunt
-          accusamus quos praesentium repellat! Velit accusantium esse quae nobis
-          debitis itaque eos id.
+          combinatorics, also called combinatorial mathematics, the field of
+          mathematics concerned with problems of selection, arrangement, and
+          operation within a finite or discrete system. Included is the closely
+          related area of combinatorial geometry.
         </div>
       </div>
     </div>

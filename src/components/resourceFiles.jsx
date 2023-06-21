@@ -24,7 +24,7 @@ function ResourceFiles(props) {
       <div className="fileDiv">
         <div className="row">
           <div className="col-md-10">
-            <h2>File 1</h2>
+            <h2>Competitive Programming 3</h2>
           </div>
           <div className="col-md">
             <button
@@ -39,12 +39,7 @@ function ResourceFiles(props) {
       <div className="fileDiv">
         <div className="row">
           <div className="col-md-10">
-            <h2>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Consequuntur porro labore ipsam optio, error eveniet reprehenderit
-              saepe fuga atque ipsa. Alias illo et optio assumenda explicabo
-              omnis, recusandae aliquam similique!
-            </h2>
+            <h2>Computer Programming | Tamim Shahriar Shubin</h2>
           </div>
           <div className="col-md">
             <button

@@ -23,6 +23,11 @@ function Navbar({ user }) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
+              <NavLink className="nav-link fontLilitaOne clr2" to="/notices">
+                Notices
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink
                 className=" nav-link fontLilitaOne clr2"
                 to="/programmersList"
@@ -46,11 +51,7 @@ function Navbar({ user }) {
                 Photo Gallery
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link fontLilitaOne clr2" to="/notices">
-                Notices
-              </NavLink>
-            </li>
+
             <li className="nav-item">
               <NavLink className="nav-link fontLilitaOne clr2" to="/resources">
                 Resources
