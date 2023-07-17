@@ -874,6 +874,7 @@ h2 {
 /* ---------------Resources page----------------- */
 
 .resourcesWrap {
+  margin-bottom: 50px;
 }
 .resourcesWrap h1 {
   text-align: center;
@@ -896,6 +897,8 @@ h2 {
   padding: 10px;
   border-radius: 10px;
   margin-top: 15px;
+  max-height: 200px;
+  overflow-y: hidden;
 }
 
 .resourcesWrap .fileDiv {

@@ -2,6 +2,9 @@ import React from "react";
 import Form from "./common/form";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
+import JoditEditor from "jodit-react";
+import { useRef } from "react";
+import { addPost } from "../services/resourcesService";
 
 class ResourcePostsFormC extends Form {
   state = {
@@ -15,37 +18,47 @@ class ResourcePostsFormC extends Form {
   schema = {
     _id: Joi.string(),
     heading: Joi.string().required().max(100).label("Title"),
-    description: Joi.string().required().label("Description"),
+    description: Joi.string().required().min(15).label("Description"),
   };
 
-  //   mapToViewModel = (data) => {
-  //     const formData = new FormData();
-
-  //     formData.append("heading", data.heading);
-  //     formData.append("description", data.description);
-  //     formData.append("photo", data.photo);
-
-  //     return formData;
-  //   };
+  mapToRequestModel = (data) => {
+    const obj = {
+      heading: data.heading,
+      text: data.description,
+    };
+    return obj;
+  };
 
   doSubmit = async () => {
-    // const data = this.mapToViewModel(this.state.data);
-    // try {
-    //   await addPhoto(data);
-    //   window.location = "/photoGallery";
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    try {
+      const data = this.mapToRequestModel(this.state.data);
+      await addPost(data);
+      this.props.navigate("/resources");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
+    const editor = this.props.editor;
     return (
       <div>
-        <span onClick={this.props.onClose}>&times;</span>
         <h1>Add Post</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("heading", "Heading")}
-          {this.renderTextarea("description", "Descripition")}
+          <p>Description</p>
+          <JoditEditor
+            ref={editor}
+            value={this.state.description}
+            onChange={(newContent) =>
+              this.setState({
+                data: {
+                  description: newContent,
+                  heading: this.state.data.heading,
+                },
+              })
+            }
+          />
 
           {this.renderButton("Add")}
         </form>
@@ -58,12 +71,14 @@ export function ResourcePostsForm(props) {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const editor = useRef(null);
   return (
     <ResourcePostsFormC
       {...props}
       params={params}
       navigate={navigate}
       location={location}
+      editor={editor}
     ></ResourcePostsFormC>
   );
 }

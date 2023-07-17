@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ResourceFilesForm from "./resourceFilesForm";
 import { getCurrentUser } from "../services/authService";
+import { getFiles } from "../services/resourcesService";
+import getFileUrl from "../services/fileServices";
 
 function ResourceFiles(props) {
   const [showForm, setShowForm] = useState(false);
   const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
 
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await getFiles();
+        setData(data);
+        setLoading(false);
+      } catch (e) {
+        console.log(e.response);
+      }
+    }
+    fetchData();
+  }, []);
+
   const handleShowForm = () => {
     setShowForm(!showForm);
   };
+
+  if (loading) return null;
   return (
     <div>
       {isAdmin && (
@@ -21,36 +41,26 @@ function ResourceFiles(props) {
           <ResourceFilesForm onClose={handleShowForm} />
         </div>
       )}
-      <div className="fileDiv">
-        <div className="row">
-          <div className="col-md-10">
-            <h2>Competitive Programming 3</h2>
+      {data.map((file, index) => {
+        return (
+          <div key={index} className="fileDiv">
+            <div className="row">
+              <div className="col-md-10">
+                <h2>{file.heading}</h2>
+              </div>
+              <div className="col-md">
+                <button
+                  className="btn btn-md custom-btn"
+                  style={{ float: "right" }}
+                  onClick={() => (window.location = getFileUrl(file.path))}
+                >
+                  View
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="col-md">
-            <button
-              className="btn btn-md custom-btn"
-              style={{ float: "right" }}
-            >
-              View
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="fileDiv">
-        <div className="row">
-          <div className="col-md-10">
-            <h2>Computer Programming | Tamim Shahriar Shubin</h2>
-          </div>
-          <div className="col-md">
-            <button
-              className="btn btn-md custom-btn"
-              style={{ float: "right" }}
-            >
-              View
-            </button>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 }

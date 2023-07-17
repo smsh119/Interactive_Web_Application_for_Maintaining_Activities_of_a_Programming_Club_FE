@@ -1,27 +1,49 @@
 import React, { Component, useRef, useState } from "react";
+
 import http from "../services/httpService";
 import UserSelector from "./userSelector";
 import Form from "./common/form";
+import JoditEditor from "jodit-react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-class TestCC extends Component {
+class Test extends Component {
+  state = {
+    text: "",
+  };
   render() {
-    const obj = {
-      paricipant1: "asdfsdaf",
-      profileId: "asdfasfasd",
-    };
-    const str = JSON.stringify(obj);
-    const obj2 = JSON.parse(str);
-
-    console.log(obj2);
-    function handleChange(e) {
-      console.log(e);
-    }
+    const editor = this.props.editor;
+    console.log(this.state.text);
     return (
-      <div>
-        <UserSelector onChange={handleChange} />
-      </div>
+      <>
+        <div>
+          <JoditEditor
+            ref={editor}
+            value={this.state.text}
+            onChange={(text) => this.setState({ text })}
+          />
+        </div>
+        <div>
+          <div dangerouslySetInnerHTML={{ __html: this.state.text }} />
+        </div>
+      </>
     );
   }
+}
+
+export function TestCC(props) {
+  const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const editor = useRef(null);
+  return (
+    <Test
+      {...props}
+      params={params}
+      navigate={navigate}
+      location={location}
+      editor={editor}
+    ></Test>
+  );
 }
 
 export default TestCC;

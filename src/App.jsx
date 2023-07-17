@@ -24,6 +24,8 @@ import AboutEditForm from "./components/aboutEditForm";
 import Resources from "./components/resources";
 import ResourcePosts from "./components/resourcePosts";
 import ResourceFiles from "./components/resourceFiles";
+import ResourcePostsForm from "./components/resourcePostsForm";
+import ResourcePost from "./components/resourcePost";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
             <Route path="files" element={<ResourceFiles />} />
             <Route path="" element={<Navigate to="posts" />} />
           </Route>
+          <Route path="/resources/newPost" element={<ResourcePostsForm />} />
+          <Route path="/resources/posts/:id" element={<ResourcePost />} />
           <Route path="/notices/noticeForm" element={<NoticeForm />} />
           <Route path="/profiles/:id" element={<Profiles />} />
           <Route path="/profiles/profileForm" element={<ProfileForm />} />

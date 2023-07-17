@@ -2,6 +2,7 @@ import React from "react";
 import Form from "./common/form";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Joi from "joi-browser";
+import { addFile } from "../services/resourcesService";
 
 class ResourceFilesFormC extends Form {
   state = {
@@ -22,19 +23,19 @@ class ResourceFilesFormC extends Form {
     const formData = new FormData();
 
     formData.append("heading", data.heading);
-    formData.append("photo", data.file);
+    formData.append("file", data.file);
 
     return formData;
   };
 
   doSubmit = async () => {
-    // const data = this.mapToViewModel(this.state.data);
-    // try {
-    //   await addPhoto(data);
-    //   window.location = "/photoGallery";
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    try {
+      const file = this.mapToRequestModel(this.state.data);
+      await addFile(file);
+      window.location = window.location;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {

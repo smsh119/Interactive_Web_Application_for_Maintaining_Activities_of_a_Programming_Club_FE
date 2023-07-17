@@ -2,6 +2,24 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
 function Resources(props) {
+  // const [loading, setLoading] = useState(true);
+  // const [data, setData] = useState(null);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const { data } = await getPosts();
+  //       // console.log(data);
+  //       setData(data);
+  //       console.log(data);
+  //       setLoading(false);
+  //     } catch (e) {
+  //       console.log(e.response);
+  //       //window.location = "/notFound";
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
+  // if (loading) return null;
   return (
     <div className="resourcesWrap">
       <h1>Resources</h1>
