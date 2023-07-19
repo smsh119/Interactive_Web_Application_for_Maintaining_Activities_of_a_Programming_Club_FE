@@ -28,6 +28,11 @@ function Navbar({ user }) {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link fontLilitaOne clr2" to="/rating">
+                Rating
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink
                 className=" nav-link fontLilitaOne clr2"
                 to="/programmersList"

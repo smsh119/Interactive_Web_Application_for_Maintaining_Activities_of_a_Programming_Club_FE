@@ -42,9 +42,9 @@ class SignUpFormC extends Form {
       <div className="signInUpForm">
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("sid", null, "text", "StudentID")}
-          {this.renderInput("email", null, "email", "Email")}
-          {this.renderInput("password", null, "password", "Password")}
+          {this.renderInput("sid", " ", "text", "StudentID")}
+          {this.renderInput("email", " ", "email", "Email")}
+          {this.renderInput("password", " ", "password", "Password")}
 
           {this.renderButton("Sign Up")}
         </form>

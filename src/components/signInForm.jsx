@@ -44,8 +44,8 @@ class SignInFormC extends Form {
         <h1>Sign In</h1>
 
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("email", null, "text", "Email")}
-          {this.renderInput("password", null, "password", "Password")}
+          {this.renderInput("email", " ", "text", "Email")}
+          {this.renderInput("password", " ", "password", "Password")}
 
           {this.renderButton("Login")}
         </form>

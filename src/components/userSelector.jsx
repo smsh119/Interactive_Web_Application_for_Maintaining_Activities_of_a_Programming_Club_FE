@@ -1,6 +1,12 @@
 import Select from "react-select";
 
-function UserSelector({ onChange, error, options, users }) {
+function UserSelector({
+  onChange,
+  error,
+  options,
+  users,
+  placeholder = undefined,
+}) {
   const handleChange = (e) => {
     const indx = options.indexOf(e);
     const obj = {
@@ -13,7 +19,12 @@ function UserSelector({ onChange, error, options, users }) {
 
   return (
     <div>
-      <Select options={options} isSearchable onChange={handleChange} />
+      <Select
+        options={options}
+        isSearchable
+        onChange={handleChange}
+        placeholder={placeholder}
+      />
       {error && <div className="alert alert-danger errdiv">{error}</div>}
     </div>
   );

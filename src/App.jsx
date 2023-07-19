@@ -26,6 +26,8 @@ import ResourcePosts from "./components/resourcePosts";
 import ResourceFiles from "./components/resourceFiles";
 import ResourcePostsForm from "./components/resourcePostsForm";
 import ResourcePost from "./components/resourcePost";
+import Rating from "./components/rating";
+import RatingForm from "./components/RatingForm";
 
 function App() {
   return (
@@ -51,6 +53,8 @@ function App() {
           <Route path="/resources/newPost" element={<ResourcePostsForm />} />
           <Route path="/resources/posts/:id" element={<ResourcePost />} />
           <Route path="/notices/noticeForm" element={<NoticeForm />} />
+          <Route path="/rating" element={<Rating />} />
+          <Route path="/rating/newRating" element={<RatingForm />} />
           <Route path="/profiles/:id" element={<Profiles />} />
           <Route path="/profiles/profileForm" element={<ProfileForm />} />
           <Route path="/logout" element={<Logout />} />

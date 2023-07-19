@@ -170,7 +170,7 @@ class Form extends Component {
   renderUserSelector(name, label, options, users) {
     return (
       <div>
-        <p>{label}</p>
+        {label && <p>{label}</p>}
         <UserSelector
           onChange={(e) => this.handleChangeForUserSelector(e, name)}
           error={this.state.errors[name]}

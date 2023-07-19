@@ -259,7 +259,7 @@ class AboutEditFormC extends Form {
           <h4>Vice President 2:</h4>
           {this.renderInput("vicePresident2", "Name")}
           {this.renderInput("vicePresident2Designation", "Designation")}
-          <h4>treasurer</h4>
+          <h4>Treasurer:</h4>
           {this.renderInput("treasurer", "Name")}
           {this.renderInput("treasurerDesignation", "Designation")}
           <h2>Student Committee:</h2>
