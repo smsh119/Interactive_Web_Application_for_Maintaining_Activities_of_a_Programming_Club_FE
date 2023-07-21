@@ -40,3 +40,6 @@ export function addProfilePicture(pic, id, picUrl) {
   }
   return http.post(apiEndPoint + `/profilePicture/${id}`, pic);
 }
+export function getVjudgeRatingStats(id) {
+  return http.get("/vjudge/" + id);
+}

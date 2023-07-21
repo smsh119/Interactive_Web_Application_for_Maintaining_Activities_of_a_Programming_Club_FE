@@ -15,6 +15,7 @@ function ResourceFiles(props) {
     async function fetchData() {
       try {
         const { data } = await getFiles();
+        data.reverse();
         setData(data);
         setLoading(false);
       } catch (e) {
@@ -54,7 +55,7 @@ function ResourceFiles(props) {
                   style={{ float: "right" }}
                   onClick={() => (window.location = getFileUrl(file.path))}
                 >
-                  View
+                  Download
                 </button>
               </div>
             </div>

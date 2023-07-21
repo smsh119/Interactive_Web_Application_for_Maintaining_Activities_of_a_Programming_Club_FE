@@ -25,7 +25,7 @@ const NoticeboardHome = (props) => {
       <div className="noticeboard" onClick={() => navigate("/notices")}>
         {notices.map((notice) => {
           return (
-            <div className="notice" key={notice._id}>
+            <div className="notice-home" key={notice._id}>
               <marquee>
                 {dayjs(notice.date).format("YYYY/MM/DD hh:mm A")} |{" "}
                 {notice.header}

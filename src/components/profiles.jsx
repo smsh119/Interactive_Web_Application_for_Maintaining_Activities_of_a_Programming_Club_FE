@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import profile_thumb from "../assets/profile_thumb.jpg";
-import { getProfile, addProfilePicture } from "../services/profileService";
+import {
+  getProfile,
+  addProfilePicture,
+  getVjudgeRatingStats,
+} from "../services/profileService";
 import { getContest } from "../services/contestService";
 import auth from "../services/authService";
 import divider from "../assets/divider.png";
@@ -12,6 +16,7 @@ import ProfileUpdateUser from "./profileUpdateUser";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import ImagePopUp from "./imagePopUp";
+import getHandleNameFromUrl from "../utils/functions";
 
 function Profiles(props) {
   const params = useParams();
@@ -21,6 +26,7 @@ function Profiles(props) {
   const [showUpdateImgBtn, setShowUpdateImgBtn] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
   const [contests, setContests] = useState([]);
+  const [ratingStats, setRatingStats] = useState(null);
   const [file, setFile] = useState(null); //for image pop up
 
   const user = auth.getCurrentUser();
@@ -43,6 +49,10 @@ function Profiles(props) {
         }
         conts.reverse();
         setContests(conts);
+
+        const { data: rstats } = await getVjudgeRatingStats(userId);
+        setRatingStats(rstats);
+
         setLoading(false);
       } catch (e) {
         console.log(e.response);
@@ -95,13 +105,15 @@ function Profiles(props) {
       return (
         <div key={contest._id}>
           <div
-            className="profileContest"
+            className="profileContest row"
             onClick={() => handleShowDetails(contest)}
           >
-            <p className="contestHeading">{contest.header}</p>
-            <p>{contest.contestType}</p>
-            <p>{dayjs(contest.date).format("YYYY/MM/DD")}</p>
-            <p>{contest.rank}</p>
+            <p className="contestHeading col-md-3">{contest.header}</p>
+            <p className="col-md-3 hideClass">{contest.contestType}</p>
+            <p className="col-md-3 hideClass">
+              {dayjs(contest.date).format("YYYY/MM/DD")}
+            </p>
+            <p className="col-md-3 hideClass">{contest.rank}</p>
           </div>
 
           {contest.show && (
@@ -267,38 +279,57 @@ function Profiles(props) {
               {`${profileInfo.contacts.linkedinLink}`}
             </Link>{" "}
           </p>
-          <div className="cfCards">
-            <div className="cfCardsHeadingWrap">
-              <h3>Codeforces Statistics</h3>
-            </div>
-            <div className="cfCard">
-              <span>CF Rank</span>
-              {profileInfo.codeforcesId.rank}
-            </div>
-            <div className="cfCard">
-              <span>CF Max Rank</span>
-              {profileInfo.codeforcesId.maxRank}
-            </div>
-            <div className="cfCard">
-              <span>CF Rating</span>
-              {profileInfo.codeforcesId.rating}
-            </div>
-            <div className="cfCard">
-              <span>CF Max Rating</span>
-              {profileInfo.codeforcesId.maxRating}
-            </div>
-            <div className="cfCard">
-              <span>CF Solved Problems</span>
-              {profileInfo.codeforcesId.solvedProblem}
-            </div>
-            <div className="cfCard">
-              <span>CF Contests</span>
-              {profileInfo.codeforcesId.totalContest}
-            </div>
+        </div>
+      </div>
+      <div className="statistics row mb-5">
+        <div className="cfCards col-md mx-1">
+          <div className="cfCardsHeadingWrap">
+            <h3>Contest Statistics</h3>
+          </div>
+          <div className="cfCard">
+            <span>Rating</span>
+            {Number(ratingStats.rating).toFixed(3)}
+          </div>
+          <div className="cfCard">
+            <span>Total Points</span>
+            {ratingStats.totalPoints}
+          </div>
+          <div className="cfCard">
+            <span>Total Panalties</span>
+            {ratingStats.totalPanalties}
+          </div>
+        </div>
+
+        <div className="cfCards col-md mx-1 ">
+          <div className="cfCardsHeadingWrap">
+            <h3>Codeforces Statistics</h3>
+          </div>
+          <div className="cfCard">
+            <span>CF Rank</span>
+            {profileInfo.codeforcesId.rank}
+          </div>
+          <div className="cfCard">
+            <span>CF Max Rank</span>
+            {profileInfo.codeforcesId.maxRank}
+          </div>
+          <div className="cfCard">
+            <span>CF Rating</span>
+            {profileInfo.codeforcesId.rating}
+          </div>
+          <div className="cfCard">
+            <span>CF Max Rating</span>
+            {profileInfo.codeforcesId.maxRating}
+          </div>
+          <div className="cfCard">
+            <span>CF Solved Problems</span>
+            {profileInfo.codeforcesId.solvedProblem}
+          </div>
+          <div className="cfCard">
+            <span>CF Contests</span>
+            {profileInfo.codeforcesId.totalContest}
           </div>
         </div>
       </div>
-
       <div className="linksSection">
         <h2>Online Profile Links</h2>
         <a
@@ -307,7 +338,9 @@ function Profiles(props) {
           rel="noopener noreferrer"
         >
           <img
-            src={`https://img.shields.io/badge/${"Github"}-${"github"}-blue`}
+            src={`https://img.shields.io/badge/${"Github"}-${getHandleNameFromUrl(
+              profileInfo.onlineJudgeLink.githubLink
+            )}-blue`}
             alt=""
           />
         </a>
@@ -331,7 +364,9 @@ function Profiles(props) {
           rel="noopener noreferrer"
         >
           <img
-            src={`https://img.shields.io/badge/${"Leetcode"}-${"Leetcode"}-blue`}
+            src={`https://img.shields.io/badge/${"Leetcode"}-${getHandleNameFromUrl(
+              profileInfo.onlineJudgeLink.leetcodeLink
+            )}-blue`}
             alt=""
           />
         </a>
@@ -343,7 +378,9 @@ function Profiles(props) {
           rel="noopener noreferrer"
         >
           <img
-            src={`https://img.shields.io/badge/${"Stopstalks"}-${"Stopstalks"}-blue`}
+            src={`https://img.shields.io/badge/${"Stopstalks"}-${getHandleNameFromUrl(
+              profileInfo.onlineJudgeLink.stopstalkLink
+            )}-blue`}
             alt=""
           />
         </a>

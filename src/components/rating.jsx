@@ -26,6 +26,7 @@ class RatingC extends Component {
         totalContest: data[i].profileId.codeforcesId.totalContest,
         profileId: data[i].profileId._id,
         _id: data[i]._id,
+        vjudgeHandle: data[i].profileId.onlineJudgeHandle.vjudge,
         vjudge: vjudgeData.filter((item) => {
           item.rating = Number(item.rating).toFixed(3);
           item.totalPoints = Number(item.totalPoints);
@@ -87,7 +88,7 @@ class RatingC extends Component {
             className="btn custom-btn"
             onClick={() => navigate("newRating")}
           >
-            New Rating
+            Add Contest
           </button>
         )}
         <SearchBox

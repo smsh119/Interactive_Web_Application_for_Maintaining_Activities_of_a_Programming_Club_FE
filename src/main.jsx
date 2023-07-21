@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap/js/dist/collapse.js";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import "font-awesome/css/font-awesome.css";
 
 import "./style.css";

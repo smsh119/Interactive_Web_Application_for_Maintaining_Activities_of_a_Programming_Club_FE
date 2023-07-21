@@ -33,28 +33,30 @@ const renderHomeCards = (info) => {
   return (
     <div className="homeCards">
       <div className="row">
-        <div className="col-md-1"></div>
-        <div className="col-md-2 mx-1 homeCard ">
+        <div className="col-md-2 homeCard ">
           <h4>Founded</h4>
           <p>1 January, 2015</p>
         </div>
-        <div className="col-md-2 mx-1 homeCard">
+        <div className="col-md-2 homeCard">
           <h4>ICPC Participation</h4>
           <p>{info.ICPC}</p>
         </div>
-        <div className="col-md-2 mx-1 homeCard">
+        <div className="col-md-2 homeCard">
           <h4>IUPC Participation</h4>
           <p>{info.IUPC}</p>
         </div>
-        <div className="col-md-2 mx-1 homeCard ">
+        <div className="col-md-2 homeCard ">
           <h4>IDPC Participation</h4>
           <p>{info.IDPC}</p>
         </div>
-        <div className="col-md-2 mx-1 homeCard">
+        <div className="col-md-2 homeCard">
           <h4>Programmers</h4>
           <p>{info.programmers}</p>
         </div>
-        <div className="col-md-1"></div>
+        <div className="col-md-2 homeCard">
+          <h4>Weekly Contests</h4>
+          <p>{info.weeklycontestscount}</p>
+        </div>
       </div>
     </div>
   );

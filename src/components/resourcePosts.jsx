@@ -13,6 +13,7 @@ function ResourcePosts(props) {
     async function fetchData() {
       try {
         const { data } = await getPosts();
+        data.reverse();
         setData(data);
         setLoading(false);
       } catch (e) {
