@@ -31,9 +31,6 @@ class Admins extends Component {
 
   async componentDidMount() {
     try {
-      const currentUser = getCurrentUser();
-      if (!currentUser.isSuperAdmin) window.location = "/";
-
       const { data } = await getAllUsers();
       const programmers = this.mapProgrammersData(data);
       this.setState({ programmers, loading: false });
@@ -84,7 +81,12 @@ class Admins extends Component {
   };
 
   render() {
+    const currentUser = getCurrentUser();
+    if (!currentUser || !currentUser.isSuperAdmin)
+      window.location = "/notFound";
+
     if (this.state.loading) return <Loading />;
+
     const { sortColumn } = this.state;
     const { data: programmers } = this.getPagedData();
     return (
