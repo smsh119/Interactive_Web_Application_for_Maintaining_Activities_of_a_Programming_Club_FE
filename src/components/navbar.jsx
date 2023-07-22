@@ -62,6 +62,13 @@ function Navbar({ user }) {
                 Resources
               </NavLink>
             </li>
+            {user && user.isSuperAdmin && (
+              <li className="nav-item">
+                <NavLink className="nav-link fontLilitaOne clr2" to="/admins">
+                  Admins
+                </NavLink>
+              </li>
+            )}
             <li className="nav-item">
               <NavLink className="nav-link fontLilitaOne clr2" to="/about">
                 About

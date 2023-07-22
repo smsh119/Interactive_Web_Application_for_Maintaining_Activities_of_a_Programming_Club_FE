@@ -5,25 +5,17 @@ import UserSelector from "./userSelector";
 import Form from "./common/form";
 import JoditEditor from "jodit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Loading from "./common/loading";
 
 class Test extends Component {
   state = {
     text: "",
   };
   render() {
-    const editor = this.props.editor;
-    console.log(this.state.text);
     return (
       <>
         <div>
-          <JoditEditor
-            ref={editor}
-            value={this.state.text}
-            onChange={(text) => this.setState({ text })}
-          />
-        </div>
-        <div>
-          <div dangerouslySetInnerHTML={{ __html: this.state.text }} />
+          <Loading />
         </div>
       </>
     );

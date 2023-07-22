@@ -12,3 +12,10 @@ export function register(user) {
   };
   return http.post(apiEndPoint, postObj);
 }
+export function getAllUsers() {
+  return http.get(apiEndPoint + "/list");
+}
+
+export function changeAdmin(obj) {
+  http.put(apiEndPoint, obj);
+}

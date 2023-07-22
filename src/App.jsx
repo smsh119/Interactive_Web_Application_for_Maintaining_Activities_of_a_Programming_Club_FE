@@ -28,6 +28,7 @@ import ResourcePostsForm from "./components/resourcePostsForm";
 import ResourcePost from "./components/resourcePost";
 import Rating from "./components/rating";
 import RatingForm from "./components/RatingForm";
+import Admins from "./components/admins";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/rating/newRating" element={<RatingForm />} />
           <Route path="/profiles/:id" element={<Profiles />} />
           <Route path="/profiles/profileForm" element={<ProfileForm />} />
+          <Route path="/admins" element={<Admins />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<NotFound />} />
