@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 import auth from "../services/authService";
 import { getProfile, getUser, saveProfile } from "../services/profileService";
 import { toast } from "react-toastify";
+import Loading from "./common/loading";
 
 class ProfileFormC extends Form {
   state = {
@@ -24,6 +25,7 @@ class ProfileFormC extends Form {
       vjudge: "",
     },
     errors: {},
+    loading: true,
   };
 
   schema = {
@@ -52,7 +54,7 @@ class ProfileFormC extends Form {
       const { data: user } = await getUser();
       if (!user.isUpdated) return;
       const { data: response } = await getProfile(user.profileId);
-      this.setState({ data: this.mapToViewModel(response) });
+      this.setState({ data: this.mapToViewModel(response), loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         const navigate = this.props.navigate;
@@ -127,6 +129,7 @@ class ProfileFormC extends Form {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="mb-5">
         <h1>Update Profile</h1>

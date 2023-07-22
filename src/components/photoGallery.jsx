@@ -4,6 +4,7 @@ import { getPhotos } from "../services/galleryService";
 import getImgUrl from "../services/imgService";
 import ImagePopUp from "./imagePopUp";
 import { getCurrentUser } from "../services/authService";
+import Loading from "./common/loading";
 
 function PhotoGallery(props) {
   const [media, setMedia] = useState(null);
@@ -26,7 +27,7 @@ function PhotoGallery(props) {
     setShowForm(!showForm);
   };
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     <div className="galleryContainer">
       <h1>Photo Gallery</h1>

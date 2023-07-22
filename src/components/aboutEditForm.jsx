@@ -5,6 +5,7 @@ import Joi from "joi-browser";
 import { toast } from "react-toastify";
 import { getInfo, saveInfo } from "../services/aboutService";
 import http from "../services/httpService";
+import Loading from "./common/loading";
 
 class AboutEditFormC extends Form {
   state = {
@@ -42,6 +43,7 @@ class AboutEditFormC extends Form {
     users: {},
     programmersList: [],
     options: [],
+    loading: true,
   };
 
   schema = {
@@ -108,7 +110,7 @@ class AboutEditFormC extends Form {
     await this.populateInfo();
     try {
       const { data } = await http.get("/programmers/list");
-      this.setState({ programmersList: data });
+      this.setState({ programmersList: data, loading: false });
       this.mapOptions(data);
     } catch (e) {
       console.log(e);
@@ -245,6 +247,7 @@ class AboutEditFormC extends Form {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="mb-5">
         <h1>Update About</h1>

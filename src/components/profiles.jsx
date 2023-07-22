@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import ImagePopUp from "./imagePopUp";
 import getHandleNameFromUrl from "../utils/functions";
+import Loading from "./common/loading";
 
 function Profiles(props) {
   const params = useParams();
@@ -204,7 +205,7 @@ function Profiles(props) {
     });
   };
 
-  if (loading) return null;
+  if (loading) return <Loading />;
 
   return (
     <div className="profileWrap">

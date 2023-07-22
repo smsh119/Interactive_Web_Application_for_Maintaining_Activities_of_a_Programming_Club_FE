@@ -6,6 +6,7 @@ import { addContest } from "../services/contestService";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import http from "../services/httpService";
+import Loading from "./common/loading";
 
 class ContestFormC extends Form {
   state = {
@@ -31,6 +32,7 @@ class ContestFormC extends Form {
     errors: {},
     programmersList: [],
     options: [],
+    loading: true,
   };
 
   schema = {
@@ -57,8 +59,8 @@ class ContestFormC extends Form {
   async componentDidMount() {
     try {
       const { data } = await http.get("/programmers/list");
-      this.setState({ programmersList: data });
       this.mapOptions(data);
+      this.setState({ programmersList: data, loading: false });
     } catch (e) {
       console.log(e);
     }
@@ -113,9 +115,6 @@ class ContestFormC extends Form {
     const ddate = dayjs(date).toISOString();
     this.setState({ date: ddate });
     const data = this.mapToRequestModel(this.state.data);
-    // for (var pair of data.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
     try {
       await addContest(data);
       const navigate = this.props.navigate;
@@ -127,6 +126,7 @@ class ContestFormC extends Form {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
     return (
       <div className="mb-5">
         <h1>Add Contest</h1>

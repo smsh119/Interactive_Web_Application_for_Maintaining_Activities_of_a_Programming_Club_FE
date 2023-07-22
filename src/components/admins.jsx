@@ -5,12 +5,14 @@ import { toast } from "react-toastify";
 import AdminsTable from "./adminsTable";
 import { changeAdmin, getAllUsers } from "../services/userService";
 import { getCurrentUser } from "../services/authService";
+import Loading from "./common/loading";
 
 class Admins extends Component {
   state = {
     programmers: [],
     searchQuery: "",
     sortColumn: { path: "isAdmin", order: "desc" },
+    loading: true,
   };
 
   mapProgrammersData = (data) => {
@@ -34,7 +36,7 @@ class Admins extends Component {
 
       const { data } = await getAllUsers();
       const programmers = this.mapProgrammersData(data);
-      this.setState({ programmers });
+      this.setState({ programmers, loading: false });
     } catch ({ response }) {
       console.log(response);
       toast.error(response.data);
@@ -82,6 +84,7 @@ class Admins extends Component {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
     const { sortColumn } = this.state;
     const { data: programmers } = this.getPagedData();
     return (

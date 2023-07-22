@@ -3,6 +3,7 @@ import ResourceFilesForm from "./resourceFilesForm";
 import { getCurrentUser } from "../services/authService";
 import { getFiles } from "../services/resourcesService";
 import getFileUrl from "../services/fileServices";
+import Loading from "./common/loading";
 
 function ResourceFiles(props) {
   const [showForm, setShowForm] = useState(false);
@@ -29,7 +30,7 @@ function ResourceFiles(props) {
     setShowForm(!showForm);
   };
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     <div>
       {isAdmin && (

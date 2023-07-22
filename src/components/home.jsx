@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import NoticeboardHome from "./noticeboardHome";
 import Footer from "./footer";
 import http from "../services/httpService";
+import Loading from "./common/loading";
 
 const renderWelcomeSection = () => {
   return (
@@ -249,7 +250,7 @@ function Home(props) {
     fetchData();
   }, []);
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     <>
       {renderWelcomeSection()}

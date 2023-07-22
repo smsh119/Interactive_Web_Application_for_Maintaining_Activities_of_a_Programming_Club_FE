@@ -4,12 +4,14 @@ import SearchBox from "./searchBox";
 import { toast } from "react-toastify";
 import ProgrammersTable from "./programmersTable";
 import http from "../services/httpService";
+import Loading from "./common/loading";
 
 class ProgrammersList extends Component {
   state = {
     programmers: [],
     searchQuery: "",
     sortColumn: { path: "name", order: "asc" },
+    loading: true,
   };
 
   mapProgrammersData = (data) => {
@@ -33,7 +35,7 @@ class ProgrammersList extends Component {
     try {
       const { data } = await http.get("/programmers");
       const programmers = this.mapProgrammersData(data);
-      this.setState({ programmers });
+      this.setState({ programmers, loading: false });
     } catch ({ response }) {
       toast.error(response.data);
       console.log(response);
@@ -63,6 +65,8 @@ class ProgrammersList extends Component {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
+
     const { sortColumn } = this.state;
     const { data: programmers } = this.getPagedData();
 

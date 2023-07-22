@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getPost } from "../services/resourcesService";
 import { useParams } from "react-router-dom";
+import Loading from "./common/loading";
 
 function ResourcePost(props) {
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,7 @@ function ResourcePost(props) {
     }
     fetchData();
   }, []);
-  if (loading) return null;
+  if (loading) return <Loading />;
 
   return (
     <div>

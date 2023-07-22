@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import { toast } from "react-toastify";
 import { getCurrentUser } from "../services/authService";
 import getExternalUrl from "../utils/externalLinks";
+import Loading from "./common/loading";
 
 function Notices(props) {
   const [notices, setNotices] = useState([]);
@@ -49,7 +50,7 @@ function Notices(props) {
     }
   };
 
-  if (loading) return; // to fix the async works in use effect
+  if (loading) return <Loading />;
   return (
     <>
       <h1>Notices</h1>

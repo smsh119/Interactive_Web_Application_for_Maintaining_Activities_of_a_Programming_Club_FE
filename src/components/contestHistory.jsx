@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import getImgUrl from "../services/imgService";
 import getExternalUrl from "../utils/externalLinks";
+import Loading from "./common/loading";
 
 function ContestHistory(props) {
   const [contests, setContests] = useState([]);
@@ -67,7 +68,7 @@ function ContestHistory(props) {
     setContests(conts);
   };
 
-  if (loading) return;
+  if (loading) return <Loading />;
 
   return (
     <div className="mb-5 contestHistoryWrapper">

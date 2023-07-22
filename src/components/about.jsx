@@ -3,6 +3,7 @@ import { getInfo } from "../services/aboutService";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../services/authService";
+import Loading from "./common/loading";
 
 function About(props) {
   const [info, setInfo] = useState();
@@ -24,7 +25,7 @@ function About(props) {
     fetch();
   }, []);
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     <div className="aboutWrap">
       <h1>About</h1>

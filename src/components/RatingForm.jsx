@@ -5,6 +5,7 @@ import Input from "./common/input";
 import UserSelector from "./userSelector";
 import dayjs from "dayjs";
 import { toast } from "react-toastify";
+import Loading from "./common/loading";
 
 class RatingForm extends Component {
   state = {
@@ -20,6 +21,7 @@ class RatingForm extends Component {
     users: {},
     programmersList: [],
     options: [],
+    loading: true,
   };
 
   schema = {
@@ -37,8 +39,8 @@ class RatingForm extends Component {
   async componentDidMount() {
     try {
       const { data } = await http.get("/programmers/list");
-      this.setState({ programmersList: data });
       this.mapOptions(data);
+      this.setState({ programmersList: data, loading: false });
     } catch (e) {
       console.log(e);
     }
@@ -145,6 +147,7 @@ class RatingForm extends Component {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
     const { data: fields } = this.state;
     return (
       <div>

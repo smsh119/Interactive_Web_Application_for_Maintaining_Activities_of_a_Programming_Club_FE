@@ -6,12 +6,14 @@ import RatingTable from "./ratingTable";
 import http from "../services/httpService";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getCurrentUser } from "../services/authService";
+import Loading from "./common/loading";
 
 class RatingC extends Component {
   state = {
     programmers: [],
     searchQuery: "",
     sortColumn: { path: "name", order: "asc" },
+    loading: true,
   };
 
   mapProgrammersData = (data, vjudgeData) => {
@@ -44,7 +46,7 @@ class RatingC extends Component {
       const { data: vjudgeData } = await http.get("/vjudge");
       const { data: profileData } = await http.get("/programmers");
       const programmers = this.mapProgrammersData(profileData, vjudgeData);
-      this.setState({ programmers });
+      this.setState({ programmers, loading: false });
     } catch ({ response }) {
       toast.error(response.data);
       console.log(response);
@@ -74,6 +76,8 @@ class RatingC extends Component {
   };
 
   render() {
+    if (this.state.loading) return <Loading />;
+
     const { sortColumn } = this.state;
     const { data: programmers } = this.getPagedData();
 

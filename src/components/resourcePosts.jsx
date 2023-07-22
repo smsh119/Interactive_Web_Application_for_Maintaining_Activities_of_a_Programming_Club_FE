@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getCurrentUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import { getPosts } from "../services/resourcesService";
+import Loading from "./common/loading";
 
 function ResourcePosts(props) {
   const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
@@ -31,7 +32,7 @@ function ResourcePosts(props) {
     navigate(`/resources/posts/${id}`);
   };
 
-  if (loading) return null;
+  if (loading) return <Loading />;
   return (
     <div>
       {isAdmin && (
