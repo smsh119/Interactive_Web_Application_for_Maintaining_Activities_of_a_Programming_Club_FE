@@ -62,18 +62,22 @@ function Navbar({ user }) {
                 Resources
               </NavLink>
             </li>
-            {user && user.isSuperAdmin && (
-              <li className="nav-item">
-                <NavLink className="nav-link fontLilitaOne clr2" to="/admins">
-                  Admins
-                </NavLink>
-              </li>
-            )}
             <li className="nav-item">
               <NavLink className="nav-link fontLilitaOne clr2" to="/about">
                 About
               </NavLink>
             </li>
+            {user && user.isSuperAdmin && (
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link fontLilitaOne"
+                  style={{ color: "red" }}
+                  to="/admins"
+                >
+                  Admins
+                </NavLink>
+              </li>
+            )}
           </ul>
           <div className="d-flex">
             {!user && (
@@ -100,12 +104,12 @@ function Navbar({ user }) {
             {user && (
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <NavLink
+                  <a
                     className="nav-link fontLilitaOne clr2"
-                    to={"/profiles/" + user.profileId}
+                    href={"/profiles/" + user.profileId}
                   >
                     {user.sid}
-                  </NavLink>
+                  </a>
                 </li>
                 {/* this is just for the horizontal line */}
                 <li className="nav-item">

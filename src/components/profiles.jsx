@@ -283,7 +283,7 @@ function Profiles(props) {
         </div>
       </div>
       <div className="statistics row mb-5">
-        <div className="cfCards col-md mx-1">
+        <div className="cfCards col-md-4 mx-1">
           <div className="cfCardsHeadingWrap">
             <h3>Contest Statistics</h3>
           </div>

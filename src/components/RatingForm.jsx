@@ -12,11 +12,12 @@ class RatingForm extends Component {
     data: [
       {
         profileId: "",
-        points: "",
+        rank: "",
         panalties: "",
       },
     ],
     date: "",
+    contestSetter: null,
     errors: {},
     users: {},
     programmersList: [],
@@ -28,12 +29,13 @@ class RatingForm extends Component {
     _id: Joi.optional(),
     list: Joi.array().items(
       Joi.object({
-        profileId: Joi.required(),
+        profileId: Joi.string().required(),
         points: Joi.number().required(),
         panalties: Joi.number().required(),
       })
     ),
     date: Joi.date().required(),
+    contestSetter: Joi.string().required(),
   };
 
   async componentDidMount() {
@@ -46,11 +48,25 @@ class RatingForm extends Component {
     }
   }
 
-  doSubmit = async () => {
+  mapToRequestModel = () => {
+    const data = this.state.data;
+    let lst = [];
+    for (let x of data) {
+      const points = x.rank ? 1000 - (x.rank - 1) * 20 : null;
+      const profileId = x.profileId;
+      const panalties = x.panalties;
+      lst = [...lst, { points, profileId, panalties }];
+    }
     const obj = {
-      list: this.state.data,
+      list: lst,
       date: this.state.date,
+      contestSetter: this.state.contestSetter,
     };
+    return obj;
+  };
+
+  doSubmit = async () => {
+    const obj = this.mapToRequestModel();
     const error = this.validate(obj);
     if (error) {
       toast.error("Fill up every input field...");
@@ -102,6 +118,10 @@ class RatingForm extends Component {
   };
 
   handleChangeForUserSelector = (e, name, index) => {
+    if (index === "contestSetter") {
+      this.setState({ contestSetter: e.profileId });
+      return;
+    }
     const data = [...this.state.data];
     const obj = { ...data[index] };
     obj[name] = e.profileId;
@@ -113,7 +133,7 @@ class RatingForm extends Component {
     const data = [...this.state.data];
     data.push({
       profileId: "",
-      points: "",
+      rank: "",
       panalties: "",
     });
     this.setState({ data });
@@ -125,23 +145,36 @@ class RatingForm extends Component {
     this.setState({ data });
   };
 
-  renderDateField = () => {
+  renderDateFieldAndContestSetter = () => {
     return (
-      <div style={{ textAlign: "center" }}>
-        <label htmlFor="date">Contest Date and Time :</label>
-        <input
-          name="date"
-          type="datetime-local"
-          onChange={this.handleChange}
-          style={{
-            width: "210px",
-            borderRadius: "10px",
-            marginLeft: "10px",
-            padding: "5px 10px",
-            color: "gray",
-            borderColor: "gray",
-          }}
-        />
+      <div className="row my-3">
+        <div className="col-md-8">
+          <label htmlFor="date">Contest Date and Time :</label>
+          <input
+            name="date"
+            type="datetime-local"
+            onChange={this.handleChange}
+            style={{
+              width: "210px",
+              borderRadius: "10px",
+              marginLeft: "10px",
+              padding: "5px 10px",
+              color: "gray",
+              borderColor: "gray",
+            }}
+          />
+        </div>
+        <div className="col-md">
+          <UserSelector
+            placeholder="Contest Setter"
+            onChange={(e) =>
+              this.handleChangeForUserSelector(e, "profileId", "contestSetter")
+            }
+            error={this.state.errors["profileId"]}
+            options={this.state.options}
+            users={this.state.programmersList}
+          />
+        </div>
       </div>
     );
   };
@@ -151,8 +184,8 @@ class RatingForm extends Component {
     const { data: fields } = this.state;
     return (
       <div>
-        <h1>New Rating</h1>
-        {this.renderDateField()}
+        <h1>Standings</h1>
+        {this.renderDateFieldAndContestSetter()}
         {fields.map((field, index) => {
           return (
             <div className="row" key={index}>
@@ -170,12 +203,12 @@ class RatingForm extends Component {
               <div className="col">
                 <Input
                   type={"number"}
-                  name={"points"}
+                  name={"rank"}
                   label={""}
-                  value={field.points}
+                  value={field.rank}
                   error={this.state.errors["points"]}
                   onChange={(e) => this.handleChange(e, index)}
-                  placeholder={"Points"}
+                  placeholder={"Rank"}
                 />
               </div>
               <div className="col">
