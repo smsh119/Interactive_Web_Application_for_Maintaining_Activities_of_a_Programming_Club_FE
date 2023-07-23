@@ -52,7 +52,10 @@ class ProfileFormC extends Form {
   async populateInfo() {
     try {
       const { data: user } = await getUser();
-      if (!user.isUpdated) return;
+      if (!user.isUpdated) {
+        this.setState({ loading: false });
+        return;
+      }
       const { data: response } = await getProfile(user.profileId);
       this.setState({ data: this.mapToViewModel(response), loading: false });
     } catch (ex) {
@@ -116,6 +119,7 @@ class ProfileFormC extends Form {
   }
 
   doSubmit = async () => {
+    this.setState({ loading: true });
     const { data } = this.state;
     const obj = this.mapToRequestModel(data);
     try {

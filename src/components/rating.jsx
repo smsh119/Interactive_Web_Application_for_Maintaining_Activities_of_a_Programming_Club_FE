@@ -12,7 +12,7 @@ class RatingC extends Component {
   state = {
     programmers: [],
     searchQuery: "",
-    sortColumn: { path: "name", order: "asc" },
+    sortColumn: { path: "vjudge.rating", order: "desc" },
     loading: true,
   };
 
@@ -30,8 +30,8 @@ class RatingC extends Component {
         _id: data[i]._id,
         vjudgeHandle: data[i].profileId.onlineJudgeHandle.vjudge,
         vjudge: vjudgeData.filter((item) => {
-          item.rating = Number(item.rating).toFixed(3);
-          item.totalPoints = Number(item.totalPoints);
+          item.rating = Number(Number(item.rating).toFixed(3));
+          item.totalPoints = Number(Number(item.totalPoints).toFixed(3));
           item.totalPanalties = Number(item.totalPanalties);
           return item.profileId === data[i].profileId._id;
         })[0],
