@@ -47,8 +47,11 @@ class Form extends Component {
   handleChange = ({ currentTarget: input }) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
+    if (errorMessage) {
+      if (input.name === "phone")
+        errors[input.name] = "Enter valid Phone number";
+      else errors[input.name] = errorMessage;
+    } else delete errors[input.name];
 
     const data = { ...this.state.data };
     if (input.name === "programDate")
@@ -82,7 +85,7 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text", placeholder = "") {
+  renderInput(name, label, type = "text", placeholder = "", required = false) {
     const { data, errors } = this.state;
     return (
       <Input
@@ -93,6 +96,7 @@ class Form extends Component {
         error={errors[name]}
         onChange={this.handleChange}
         placeholder={placeholder}
+        required={required}
       />
     );
   }

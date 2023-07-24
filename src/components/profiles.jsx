@@ -289,11 +289,11 @@ function Profiles(props) {
           </div>
           <div className="cfCard">
             <span>Rating</span>
-            {Number(ratingStats.rating).toFixed(3)}
+            {Number(Number(ratingStats.rating).toFixed(3))}
           </div>
           <div className="cfCard">
             <span>Total Points</span>
-            {ratingStats.totalPoints}
+            {Number(Number(ratingStats.totalPoints).toFixed(3))}
           </div>
           <div className="cfCard">
             <span>Total Panalties</span>

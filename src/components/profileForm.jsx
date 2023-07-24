@@ -39,12 +39,12 @@ class ProfileFormC extends Form {
       .required()
       .label("Phone Number"),
     email: Joi.string().email().required().label("Email"),
-    fbLink: Joi.string().label("Facebook Link"),
-    linkedinLink: Joi.string().label("LinkedIn Link"),
-    githubLink: Joi.string().label("Github Link"),
-    stopstalkLink: Joi.string().label("Stopstalk Link"),
+    fbLink: Joi.optional().label("Facebook Link"),
+    linkedinLink: Joi.optional().label("LinkedIn Link"),
+    githubLink: Joi.optional().label("Github Link"),
+    stopstalkLink: Joi.optional().label("Stopstalk Link"),
     codeforcesLink: Joi.string().label("Codeforces Link"),
-    leetcodeLink: Joi.string().label("Leetcode Link"),
+    leetcodeLink: Joi.optional().label("Leetcode Link"),
     codeforces: Joi.string().label("Codeforces Handle"),
     vjudge: Joi.string().label("VJudge Handle"),
   };
@@ -78,12 +78,27 @@ class ProfileFormC extends Form {
       currentStatus: response.currentStatus,
       phone: response.contacts.phone,
       email: response.contacts.email,
-      fbLink: response.contacts.fbLink,
-      linkedinLink: response.contacts.linkedinLink,
-      githubLink: response.onlineJudgeLink.githubLink,
-      stopstalkLink: response.onlineJudgeLink.stopstalkLink,
+      fbLink:
+        response.contacts.fbLink === "not provided"
+          ? ""
+          : response.contacts.fbLink,
+      linkedinLink:
+        response.contacts.linkedinLink === "not provided"
+          ? ""
+          : response.contacts.linkedinLink,
+      githubLink:
+        response.onlineJudgeLink.githubLink === "not provided"
+          ? ""
+          : response.contacts.githubLink,
+      stopstalkLink:
+        response.onlineJudgeLink.stopstalkLink === "not provided"
+          ? ""
+          : response.contacts.stopstalkLink,
       codeforcesLink: response.onlineJudgeLink.codeforcesLink,
-      leetcodeLink: response.onlineJudgeLink.leetcodeLink,
+      leetcodeLink:
+        response.onlineJudgeLink.leetcodeLink === "not provided"
+          ? ""
+          : response.contacts.leetcodeLink,
       codeforces: response.onlineJudgeHandle.codeforces,
       vjudge: response.onlineJudgeHandle.vjudge,
     };
@@ -99,14 +114,17 @@ class ProfileFormC extends Form {
       contacts: {
         phone: data.phone,
         email: data.email,
-        fbLink: data.fbLink,
-        linkedinLink: data.linkedinLink,
+        fbLink: data.fbLink === "" ? "not provided" : data.fbLink,
+        linkedinLink:
+          data.linkedinLink === "" ? "not provided" : data.linkedinLink,
       },
       onlineJudgeLink: {
-        githubLink: data.githubLink,
-        stopstalkLink: data.stopstalkLink,
+        githubLink: data.githubLink === "" ? "not provided" : data.githubLink,
+        stopstalkLink:
+          data.stopstalkLink === "" ? "not provided" : data.stopstalkLink,
         codeforcesLink: data.codeforcesLink,
-        leetcodeLink: data.leetcodeLink,
+        leetcodeLink:
+          data.leetcodeLink === "" ? "not provided" : data.leetcodeLink,
       },
       onlineJudgeHandle: {
         codeforces: data.codeforces,
@@ -138,19 +156,58 @@ class ProfileFormC extends Form {
       <div className="mb-5">
         <h1>Update Profile</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("name", "Name")}
-          {this.renderInput("bio", "Bio")}
-          {this.renderInput("currentStatus", "Current Status")}
-          {this.renderInput("phone", "Phone", "number")}
-          {this.renderInput("email", "Email")}
-          {this.renderInput("fbLink", "Facebook Link")}
-          {this.renderInput("linkedinLink", "LinkedIn Link")}
-          {this.renderInput("githubLink", "Github Link")}
-          {this.renderInput("stopstalkLink", "Stopstalks Link")}
-          {this.renderInput("codeforcesLink", "Codeforces Link")}
-          {this.renderInput("leetcodeLink", "Leetcode Link")}
-          {this.renderInput("codeforces", "Codeforces Handle")}
-          {this.renderInput("vjudge", "VJudge Handle")}
+          {this.renderInput("name", "Name", "text", "Required", true)}
+          {this.renderInput("bio", "Bio", "text", "Required", true)}
+          {this.renderInput(
+            "currentStatus",
+            "Current Status",
+            "text",
+            "Required",
+            true
+          )}
+          {this.renderInput("phone", "Phone", "number", "Required", true)}
+          {this.renderInput("email", "Email", "text", "Required", true)}
+          {this.renderInput("fbLink", "Facebook Link", "text", "Optional")}
+          {this.renderInput(
+            "linkedinLink",
+            "LinkedIn Link",
+            "text",
+            "Optional"
+          )}
+          {this.renderInput("githubLink", "Github Link", "text", "Optional")}
+          {this.renderInput(
+            "stopstalkLink",
+            "Stopstalks Link",
+            "text",
+            "Optional"
+          )}
+          {this.renderInput(
+            "codeforcesLink",
+            "Codeforces Link",
+            "text",
+            "Required",
+            true
+          )}
+          {this.renderInput(
+            "leetcodeLink",
+            "Leetcode Link",
+            "text",
+            "Optional"
+          )}
+          {this.renderInput(
+            "codeforces",
+            "Codeforces Handle",
+            "text",
+            "Required",
+            true
+          )}
+          {this.renderInput(
+            "vjudge",
+            "VJudge Handle",
+            "text",
+            "Required",
+            true
+          )}
           {this.renderButton("Save")}
         </form>
       </div>
