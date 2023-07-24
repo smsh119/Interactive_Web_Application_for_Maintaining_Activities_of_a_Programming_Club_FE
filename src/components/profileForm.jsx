@@ -89,16 +89,16 @@ class ProfileFormC extends Form {
       githubLink:
         response.onlineJudgeLink.githubLink === "not provided"
           ? ""
-          : response.contacts.githubLink,
+          : response.onlineJudgeLink.githubLink,
       stopstalkLink:
         response.onlineJudgeLink.stopstalkLink === "not provided"
           ? ""
-          : response.contacts.stopstalkLink,
+          : response.onlineJudgeLink.stopstalkLink,
       codeforcesLink: response.onlineJudgeLink.codeforcesLink,
       leetcodeLink:
         response.onlineJudgeLink.leetcodeLink === "not provided"
           ? ""
-          : response.contacts.leetcodeLink,
+          : response.onlineJudgeLink.leetcodeLink,
       codeforces: response.onlineJudgeHandle.codeforces,
       vjudge: response.onlineJudgeHandle.vjudge,
     };
