@@ -23,6 +23,7 @@ class TableHeader extends Component {
     return (
       <thead>
         <tr>
+          {this.props.sl && <th></th>}
           {this.props.columns.map((column) => (
             <th
               className="clickable"

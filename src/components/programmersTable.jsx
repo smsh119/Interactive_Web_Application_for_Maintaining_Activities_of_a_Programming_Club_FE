@@ -30,6 +30,7 @@ class ProgrammersTable extends Component {
         onSort={onSort}
         sortColumn={sortColumn}
         columns={this.columns}
+        sl={true}
       />
     );
   }

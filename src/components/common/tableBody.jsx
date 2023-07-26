@@ -13,9 +13,10 @@ class TableBody extends Component {
     const { data, columns } = this.props;
     return (
       <tbody>
-        {data.map((item) => {
+        {data.map((item, index) => {
           return (
             <tr key={item._id}>
+              {this.props.sl && <td>{index + 1}.</td>}
               {columns.map((column) => {
                 return (
                   <td key={this.createKey(item, column)}>
