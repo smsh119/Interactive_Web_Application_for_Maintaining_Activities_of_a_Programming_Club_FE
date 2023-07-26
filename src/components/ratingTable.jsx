@@ -14,8 +14,8 @@ class RatingTable extends Component {
     { path: "sid", label: "Student ID" },
     { path: "vjudgeHandle", label: "Vjudge ID" },
     { path: "vjudge.rating", label: "Rating" },
-    { path: "vjudge.totalPanalties", label: "Total Panalties" },
     { path: "vjudge.totalPoints", label: "Total Points" },
+    { path: "vjudge.totalPanalties", label: "Total Soved Problems" },
   ];
 
   constructor() {

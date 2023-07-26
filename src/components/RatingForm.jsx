@@ -219,7 +219,7 @@ class RatingForm extends Component {
                   value={field.panalties}
                   error={this.state.errors["panalties"]}
                   onChange={(e) => this.handleChange(e, index)}
-                  placeholder={"Panalties"}
+                  placeholder={"Solved Problems"}
                 />
               </div>
             </div>

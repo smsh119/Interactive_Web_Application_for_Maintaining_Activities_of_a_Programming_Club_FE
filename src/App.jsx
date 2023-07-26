@@ -29,6 +29,8 @@ import ResourcePost from "./components/resourcePost";
 import Rating from "./components/rating";
 import RatingForm from "./components/RatingForm";
 import Admins from "./components/admins";
+import ResetPassword from "./components/resetPassword";
+import NewPassword from "./components/newPassword";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
           <Route path="/about/edit" element={<AboutEditForm />} />
           <Route path="/signIn" element={<SignInForm />} />
           <Route path="/signUp" element={<SignUpForm />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/users/verify/:id" element={<NewPassword />} />
           <Route path="/notices" element={<Notices />} />
           <Route path="/resources" element={<Resources />}>
             <Route path="posts" element={<ResourcePosts />} />

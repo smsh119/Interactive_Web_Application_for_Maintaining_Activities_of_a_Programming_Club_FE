@@ -1,32 +1,28 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import auth from "../services/authService";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import auth from "../services/authService";
+import { resetPassword } from "../services/userService";
 
-class SignInFormC extends Form {
+class ResetPasswordC extends Form {
   state = {
-    data: { email: "", password: "" },
+    data: { email: "" },
     errors: {},
   };
 
   schema = {
     email: Joi.string().required().email().label("Email"),
-    password: Joi.string().required().label("Password"),
   };
 
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      await auth.login(data.email, data.password);
-      const location = this.props.location;
-
-      if (location.state) {
-        const prevUrl = location.state.prevUrl;
-        window.location = prevUrl;
-      } else window.location = "/";
+      const respose = await resetPassword(data);
+      alert(respose.data);
+      window.location = "/";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
@@ -42,30 +38,28 @@ class SignInFormC extends Form {
     if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
     return (
       <div className="signInUpForm">
-        <h1>Sign In</h1>
+        <h1>Reset Password</h1>
 
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("email", " ", "text", "Email")}
-          {this.renderInput("password", " ", "password", "Password")}
-          <Link to="/reset-password">Forgot Password</Link>
-          {this.renderButton("Login")}
+          {this.renderButton("Reset")}
         </form>
       </div>
     );
   }
 }
 
-export function SignInForm(props) {
+export function ResetPassword(props) {
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   return (
-    <SignInFormC
+    <ResetPasswordC
       params={params}
       navigate={navigate}
       location={location}
-    ></SignInFormC>
+    ></ResetPasswordC>
   );
 }
 
-export default SignInForm;
+export default ResetPassword;

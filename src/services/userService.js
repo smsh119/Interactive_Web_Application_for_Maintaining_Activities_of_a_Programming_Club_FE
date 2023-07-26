@@ -17,5 +17,12 @@ export function getAllUsers() {
 }
 
 export function changeAdmin(obj) {
-  http.put(apiEndPoint, obj);
+  return http.put(apiEndPoint, obj);
+}
+
+export function resetPassword(data) {
+  return http.post(apiEndPoint + "/resetPassword", data);
+}
+export function changePassword(data) {
+  return http.put(apiEndPoint + "/newpassword ", data);
 }

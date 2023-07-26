@@ -5,10 +5,9 @@ import * as userService from "../services/userService";
 import auth from "../services/authService";
 import { useParams, useNavigate } from "react-router-dom";
 
-class SignUpFormC extends Form {
+class NewPasswordC extends Form {
   state = {
     data: {
-      sid: "",
       email: "",
       password: "",
     },
@@ -16,23 +15,24 @@ class SignUpFormC extends Form {
   };
 
   schema = {
-    sid: Joi.string().required().min(10).max(10).label("Student ID"),
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().label("Password"),
   };
 
   doSubmit = async () => {
     try {
-      const response = await userService.register(this.state.data);
-      auth.loginWithJwt(response.headers["x-auth-token"]);
-      alert(response.data);
-      window.location = "/";
+      const params = this.props.params;
+      const data = { ...this.state.data, Id: params.id };
+      const response = await userService.changePassword(data);
+      alert("Password changed successfully.");
+      window.location = "/signIn";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
         const errors = { ...this.state.errors };
         errors.email = ex.response.data;
         this.setState({ errors });
       }
+      // console.log(ex);
     }
   };
 
@@ -41,23 +41,22 @@ class SignUpFormC extends Form {
     if (auth.getCurrentUser()) return setTimeout(() => navigate("/"));
     return (
       <div className="signInUpForm">
-        <h1>Sign Up</h1>
+        <h1>New Password</h1>
         <form onSubmit={this.handleSubmit}>
-          {this.renderInput("sid", " ", "text", "StudentID")}
           {this.renderInput("email", " ", "email", "Email")}
-          {this.renderInput("password", " ", "password", "Password")}
+          {this.renderInput("password", " ", "password", "New Password")}
 
-          {this.renderButton("Sign Up")}
+          {this.renderButton("Save")}
         </form>
       </div>
     );
   }
 }
 
-export function SignUpForm(props) {
+export function NewPassword(props) {
   const params = useParams();
   const navigate = useNavigate();
-  return <SignUpFormC params={params} navigate={navigate}></SignUpFormC>;
+  return <NewPasswordC params={params} navigate={navigate}></NewPasswordC>;
 }
 
-export default SignUpForm;
+export default NewPassword;

@@ -356,6 +356,10 @@ h2 {
   width: 200px;
   font-size: 0.7rem;
 }
+.signInUpForm a {
+  color: #0a80b3;
+  font-size: 0.8rem;
+}
 
 /* ------------------contest page-------------------- */
 
