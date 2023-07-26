@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PhotoGalleryForm from "./photoGalleryForm";
-import { getPhotos } from "../services/galleryService";
+import { deletePhoto, getPhotos } from "../services/galleryService";
 import getImgUrl from "../services/imgService";
 import ImagePopUp from "./imagePopUp";
 import { getCurrentUser } from "../services/authService";
 import Loading from "./common/loading";
+import { relative } from "joi-browser";
+import { toast } from "react-toastify";
 
 function PhotoGallery(props) {
   const [media, setMedia] = useState(null);
@@ -27,6 +29,20 @@ function PhotoGallery(props) {
     setShowForm(!showForm);
   };
 
+  const handleDelete = async (photo) => {
+    let data = [...media];
+    const indx = data.indexOf(photo);
+    data = [...data.slice(0, indx), ...data.slice(indx + 1)];
+    setMedia(data);
+    try {
+      await deletePhoto(photo._id);
+      toast("Deleted Successfully!");
+    } catch (error) {
+      console.log(error.message);
+      window.location.reload();
+    }
+  };
+
   if (loading) return <Loading />;
   return (
     <div className="galleryContainer">
@@ -44,22 +60,33 @@ function PhotoGallery(props) {
       <div className="media-container">
         {media.map((file, index) => {
           return (
-            <div
-              className="media"
-              key={index}
-              onClick={() => setFile(file.photoLink)}
-              onMouseOver={() => setShowDes(file.photoLink)}
-              onMouseLeave={() => setShowDes(null)}
-            >
-              <img src={getImgUrl(file.photoLink)} alt="" />
+            <div key={index}>
               <div
-                style={{
-                  display: showDes === file.photoLink ? "block" : "none",
-                }}
+                className="media"
+                key={index}
+                onClick={() => setFile(file.photoLink)}
+                onMouseOver={() => setShowDes(file.photoLink)}
+                onMouseLeave={() => setShowDes(null)}
               >
-                <h5>{file.heading}</h5>
-                {file.description}
+                <img src={getImgUrl(file.photoLink)} alt="" />
+                <div
+                  style={{
+                    display: showDes === file.photoLink ? "block" : "none",
+                  }}
+                >
+                  <h5>{file.heading}</h5>
+                  {file.description}
+                </div>
               </div>
+              {isAdmin && (
+                <button
+                  className="btn btn-danger btn-sm"
+                  style={{ width: "100%", zIndex: "0" }}
+                  onClick={() => handleDelete(file)}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           );
         })}

@@ -8,3 +8,7 @@ export function getPhotos() {
 export function addPhoto(photo) {
   return http.post(apiEndPoint, photo);
 }
+
+export function deletePhoto(id) {
+  return http.delete(`${apiEndPoint}/${id}`);
+}

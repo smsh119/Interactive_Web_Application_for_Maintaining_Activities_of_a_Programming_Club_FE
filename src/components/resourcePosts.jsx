@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getCurrentUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
-import { getPosts } from "../services/resourcesService";
+import { deletePost, getPosts } from "../services/resourcesService";
 import Loading from "./common/loading";
+import { toast } from "react-toastify";
 
 function ResourcePosts(props) {
   const isAdmin = getCurrentUser() ? getCurrentUser().isAdmin : false;
@@ -32,6 +33,21 @@ function ResourcePosts(props) {
     navigate(`/resources/posts/${id}`);
   };
 
+  const handleDeletePost = async (post) => {
+    let posts = [...data];
+    const indx = posts.indexOf(post);
+    posts = [...posts.slice(0, indx), ...posts.slice(indx + 1)];
+    setData(posts);
+    try {
+      await deletePost(post._id);
+      toast("Deleted Successfully!");
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+      window.location.reload();
+    }
+  };
+
   if (loading) return <Loading />;
   return (
     <div>
@@ -48,12 +64,32 @@ function ResourcePosts(props) {
               style={{ display: "flex", justifyContent: "space-between" }}
             >
               <h2>{post.heading}</h2>
-              <button
-                className="btn btn-sm custom-btn"
-                onClick={() => handleShowPost(post._id)}
+              <div
+                style={{
+                  minWidth: "110px",
+                  maxWidth: "110px",
+                }}
               >
-                View Full Post
-              </button>
+                <button
+                  className="btn btn-sm custom-btn mb-1"
+                  style={{ display: "block", width: "100%" }}
+                  onClick={() => handleShowPost(post._id)}
+                >
+                  View Full Post
+                </button>
+                {isAdmin && (
+                  <button
+                    className="btn btn-sm btn-danger"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                    }}
+                    onClick={() => handleDeletePost(post)}
+                  >
+                    Delete
+                  </button>
+                )}
+              </div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: post.text }}></div>
           </div>

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ResourceFilesForm from "./resourceFilesForm";
 import { getCurrentUser } from "../services/authService";
-import { getFiles } from "../services/resourcesService";
+import { deleteFile, getFiles } from "../services/resourcesService";
 import getFileUrl from "../services/fileServices";
 import Loading from "./common/loading";
+import { toast } from "react-toastify";
 
 function ResourceFiles(props) {
   const [showForm, setShowForm] = useState(false);
@@ -29,6 +30,20 @@ function ResourceFiles(props) {
   const handleShowForm = () => {
     setShowForm(!showForm);
   };
+  const handleDeleteFile = async (file) => {
+    let files = [...data];
+    const indx = files.indexOf(file);
+    files = [...files.slice(0, indx), ...files.slice(indx + 1)];
+    setData(files);
+    try {
+      await deleteFile(file._id);
+      toast("Deleted Successfully!");
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
+      window.location.reload();
+    }
+  };
 
   if (loading) return <Loading />;
   return (
@@ -46,18 +61,30 @@ function ResourceFiles(props) {
       {data.map((file, index) => {
         return (
           <div key={index} className="fileDiv">
-            <div className="row">
-              <div className="col-md-10">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>
                 <h2>{file.heading}</h2>
               </div>
-              <div className="col-md">
+              <div>
                 <button
-                  className="btn btn-md custom-btn"
-                  style={{ float: "right" }}
+                  className="btn btn-md custom-btn mb-1"
+                  style={{ display: "block", width: "100%" }}
                   onClick={() => (window.location = getFileUrl(file.path))}
                 >
                   Download
                 </button>
+                {isAdmin && (
+                  <button
+                    className="btn btn-md btn-danger"
+                    style={{
+                      display: "block",
+                      width: "100%",
+                    }}
+                    onClick={() => handleDeleteFile(file)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           </div>
