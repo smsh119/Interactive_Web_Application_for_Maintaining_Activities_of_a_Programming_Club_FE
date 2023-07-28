@@ -26,7 +26,7 @@ function ResourcePosts(props) {
   }, []);
 
   const handleAddPost = () => {
-    navigate("/resources/newPost");
+    navigate("/resources/new");
   };
 
   const handleShowPost = (id) => {

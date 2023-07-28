@@ -55,7 +55,8 @@ function App() {
             <Route path="files" element={<ResourceFiles />} />
             <Route path="" element={<Navigate to="posts" />} />
           </Route>
-          <Route path="/resources/newPost" element={<ResourcePostsForm />} />
+          <Route path="/resources/new" element={<ResourcePostsForm />} />
+          <Route path="/resources/edit" element={<ResourcePostsForm />} />
           <Route path="/resources/posts/:id" element={<ResourcePost />} />
           <Route path="/notices/noticeForm" element={<NoticeForm />} />
           <Route path="/rating" element={<Rating />} />

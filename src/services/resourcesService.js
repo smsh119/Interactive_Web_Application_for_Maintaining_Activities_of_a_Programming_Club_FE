@@ -11,7 +11,13 @@ export function getPost(id) {
 }
 
 export function addPost(post) {
-  return http.post(apiEndPoint + "/post", post);
+  const id = post._id;
+  delete post._id;
+  if (id === null) return http.post(apiEndPoint + "/post", post);
+  return editPost(id, post);
+}
+function editPost(id, post) {
+  return http.put(apiEndPoint + "/post/" + id, post);
 }
 export function deletePost(id) {
   return http.delete(apiEndPoint + "/post/" + id);
