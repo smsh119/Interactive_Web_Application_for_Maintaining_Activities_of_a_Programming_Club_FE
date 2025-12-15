@@ -1,4 +1,4 @@
-import http from "./httpService";
+import http from "./dummyDataService";
 
 const apiEndPoint = "/notices";
 
